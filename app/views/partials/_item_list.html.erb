@@ -1,0 +1,36 @@
+<% unless @all_items.nil? || @all_items.empty? %>
+  <h5>All Bakery Items</h5>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="300">Name</th>
+        <th width="100">Price</th>
+        <th width="100">Units</th>
+        <% if controller.controller_name == 'orders' %>
+          <th width="100">&nbsp;</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @all_items.each do |item| %>
+        <tr>
+          <td><%= link_to item.name, item_path(item) %></td>
+          <td><%= number_to_currency item.current_price %></td>
+          <td><%= item.units_per_item %> <%= item.category == 'bread' ? 'loaf' : item.category %></td>
+          
+          <!--
+          <% if controller.controller_name == 'orders' %>
+            <td>
+              <%= link_to(add_to_cart_path(item.id), class: 'button tiny radius') do %>
+                &nbsp;Add to Cart&nbsp;
+              <% end %>
+            </td>
+          <% end %>
+          -->
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table><br>
+  <%= will_paginate @all_items, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<% end %>

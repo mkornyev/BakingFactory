@@ -1,0 +1,18 @@
+<%= simple_form_for @customer, html: { class: 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Customer</legend>
+
+    <%= f.input :first_name, input_html: {class: "avg"} %>
+    <%= f.input :last_name, input_html: {class: "avg"} %>
+    <%= f.input :phone, input_html: {class: "avg"} %>
+    <%= f.input :email, input_html: {class: "avg"} %>
+    <%= f.input :active %>
+    
+
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'button radius' %>
+      <%= link_to 'Cancel', customers_path, :class => 'button alert radius' %>
+    </div>
+  </fieldset>
+<% end %>

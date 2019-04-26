@@ -1,0 +1,9 @@
+<div class="row" style="margin: 5%; margin-top: 10%;">
+	<div class="search_section">
+		<%= form_tag items_path, method: :get do %>
+			<%= text_field_tag :query, params[:query] %>
+			<%= submit_tag "Search", name: nil%>
+		<% end %>
+	</div>
+	<%= render :partial => "partials/item_list" %>
+</div>

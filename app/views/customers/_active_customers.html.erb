@@ -1,0 +1,25 @@
+<% if @active_customers.empty? %>
+  <h4>No active customers at this time.</h4>
+<% else %>
+  <h4>Active Customers</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="225">Name</th>
+        <th width="125">Phone</th>
+        <th width="200">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @active_customers.each do |customer| %>
+        <tr>
+          <td><%= link_to customer.name, customer_path(customer) %></td>
+          <td><%= number_to_phone customer.phone %></td>
+          <td><%= mail_to customer.email, customer.email, encode: "javascript"  %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%= will_paginate @active_customers, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>  
+<% end %>
+<p>&nbsp;</p>

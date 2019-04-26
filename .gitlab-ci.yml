@@ -1,0 +1,18 @@
+# Phase 5
+before_script:
+# Print status
+  - echo -e "\e[33m+------------------------+\n|   SETTING UP PROJECT   |\n+------------------------+\e[0m"
+# Install gems the Docker image may not have
+  - bundle install --gemfile=Gemfile
+# Set up the test database
+  - rails db:test:prepare
+  - rails db:migrate:reset
+
+test:
+  script:
+# If our solution project exists, print status
+    - if [ -d /home/sol ]; then echo -e "\e[33m+----------------------------+\n|   RUNNING OUR ABILITY TESTS   |\n+----------------------------+\e[0m"; fi
+# If our solution project exists, copy our test suite over and run against their project
+    - if [ -d /home/sol ]; then rm -rf ./test && cp -r /home/sol/test ./ && rails test test/models/ability_test.rb; fi
+
+

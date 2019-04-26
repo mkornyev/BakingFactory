@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Baking Factory System</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%# javascript_include_tag 'application' %>
+    <%# stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
+    <%# stylesheet_link_tag "https://fonts.googleapis.com/css?family=Bitter|Josefin+Sans|Nunito|Varela+Round" %>
+    <!-- Bootstrap Links -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+
+  <!-- Partials for the topbar and navigation -->
+  <% if logged_in? && ( current_user.role?(:admin) ) %>
+    <%= render :partial => "partials/" %>
+  <% elsif logged_in? && ( current_user.role?(:baker) ) %>
+    <%= render :partial => "partials/" %>
+  <% elsif logged_in? && ( current_user.role?(:shipper) ) %>
+    <%= render :partial => "partials/" %>
+  <% elsif logged_in? && current_user.role?(:customer) %>
+    <%= render :partial => "partials/nav_guest" %>
+  <% else %>
+    <%= render :partial => "partials/nav_guest" %>
+  <% end %>
+
+  <body style="margin-top: 80px; animation: fadeIn 1s;">
+    <!-- Flash messages appear here -->
+    <%= render :partial => "partials/flash" %>
+
+    <!-- MAIN CONTENT FOR HOME -->
+    <%= yield %>
+      
+    <%= javascript_include_tag 'application' %>   
+  </body>
+
+  <%= render :partial => "partials/footer" %> 
+
+</html>

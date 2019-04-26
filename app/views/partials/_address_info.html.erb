@@ -1,0 +1,6 @@
+
+  <%= address.street_1 %><br />
+  <% unless address.street_2.blank? %>
+    <%= address.street_2 %><br />
+  <% end %>
+  <%= address.city %>, <%= address.state %> <%= address.zip %>

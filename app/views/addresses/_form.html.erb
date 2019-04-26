@@ -1,0 +1,22 @@
+<%= simple_form_for @address, html: { class: 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Address</legend>
+
+    <%= f.input :customer_id, collection: Customer.active.alphabetical, include_blank: true, input_html: {class: "avg"} %>
+
+    <%= f.input :recipient, input_html: {class: "avg"} %>
+    <%= f.input :street_1, input_html: {class: "avg"} %>
+    <%= f.input :street_2, input_html: {class: "avg"} %>
+    <%= f.input :city, input_html: {class: "avg"} %>
+    <%= f.input :state, collection: Address::STATES_LIST, include_blank: true, input_html: {class: "avg"} %>
+    <%= f.input :zip, input_html: {class: "avg"} %>
+    <%= f.input :is_billing, label: 'Billing? ' %>
+    <%= f.input :active %>
+
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'button radius' %>
+      <%= link_to 'Cancel', addresses_path, :class => 'button alert radius' %>
+    </div>
+  </fieldset>
+<% end %>

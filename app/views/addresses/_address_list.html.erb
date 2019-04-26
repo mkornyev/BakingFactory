@@ -1,0 +1,35 @@
+<% if addresses.empty? %>
+  <p><em>There are no <%= state %> addresses at this time.</em></p>
+<% else %>
+<h2><%= state.capitalize %> Addresses</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th width="225">Customer</th>
+      <th width="225">Recipient</th>
+      <th width="350">Address</th>
+      <th width="75">Billing?</th>
+      <th width="75">&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% addresses.each do |address| %>
+      <tr>
+        <td><%= link_to address.customer.proper_name, customer_path(address.customer) %></td>
+        <td><%= address.recipient %></td>
+        <td>
+          <%= render :partial => "partials/address_info", locals: {address: address} %>
+        </td>
+        <td align="center"><%= address.is_billing ? "Yes" : "No" %></td>      
+        <td>
+          <%= link_to(edit_address_path(address), class: 'button tiny radius warning') do %>
+            &nbsp;Edit&nbsp;
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate addresses, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>  
+<% end %>
+<p>&nbsp;</p>

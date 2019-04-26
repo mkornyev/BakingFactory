@@ -1,0 +1,10 @@
+<% unless @inactive_customers.empty? %>
+  <div class="panel clearfix">
+    <h3>Inactive Customers</h3>
+    <ul>
+      <% @inactive_customers.each do |customer| %>
+        <li><%= link_to customer.name, customer_path(customer) %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

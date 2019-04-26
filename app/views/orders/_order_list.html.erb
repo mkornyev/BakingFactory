@@ -1,0 +1,23 @@
+
+  <h4><%= status %> Orders</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="100">Date</th>
+        <th width="225">Customer</th>
+        <th width="225">Recipient</th>
+        <th width="100">Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% orders.each do |order| %>
+        <tr>
+          <td><%= link_to order.date.strftime('%m/%d/%y'), order_path(order) %></td>
+          <td><%= link_to order.customer.name, customer_path(order.customer) %></td>
+          <td><%= link_to order.address.recipient, address_path(order.address) %></td>
+          <td><%= number_to_currency order.grand_total %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%= will_paginate orders, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>  

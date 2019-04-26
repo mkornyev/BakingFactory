@@ -1,0 +1,20 @@
+<% unless previous_orders.empty? %>
+  <div class="panel clearfix">
+    <h3>Order History</h3>
+    <table>
+      <thead>
+        <tr>
+          <th width="120">Date</th>
+          <th width="100">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% previous_orders.each do |order| %>
+        <tr>
+          <td><%= link_to order.date.strftime('%m/%d/%y'), order_path(order) %></td>
+          <td><%= number_to_currency order.grand_total %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>
