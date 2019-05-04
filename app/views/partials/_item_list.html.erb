@@ -1,36 +1,79 @@
-<% unless @all_items.nil? || @all_items.empty? %>
-  <h5>All Bakery Items</h5>
+<% if @all_items.nil? || @all_items.empty? %>
+    <div class='col-9'>
+      Nothing currently available. Try, try again!
+      </div>
+<% else %>
+      <div class='row' style="color: #FFC107; padding-left: 0; margin-left: 36%;">
+      <%= will_paginate @all_items, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+      </div>
+      
+      <div class="row" style=" width: 92%; margin-left: 6%;">
+      <% @all_items.each do |item| %>
+
+      <!-- Modal (w/show trigger) -->
+      <div class="card" style="width: 18rem; margin: 3%;">
+
+        <% if item.category == 'bread' %>
+          <%= image_tag("bread.jpg", class: 'card-img-top')%>
+        <% elsif item.category == 'muffins' %>
+          <%= image_tag("muffins.jpg", class: 'card-img-top' )%>
+        <% else %>
+          <%= image_tag("pastries.jpg", class: 'card-img-top')%>
+        <% end %>
+          
+        <div class="card-body">
+          <h5 class="card-title"><%= item.name %></h5>
+          <p class="card-text">
+          <%= number_to_currency item.current_price %> | <%= item.units_per_item %> <%= item.category == 'bread' ? 'loaf' : item.category %><br>
+          <%= truncate item.description, length: 57 %> 
+          </p>
+          <%= link_to "See more", item_path(item), {:style=>'text-decoration: none;', :class => 'btn btn-outline-primary btn-md center-block' } %>
+        </div>
+      </div>
+
+      <% end %>
+      </div>
+
+      <div class='row' style="color: #FFC107; padding-left: 0; margin-left: 36%;">
+      <%= will_paginate @all_items, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+      </div>
+      
+<% end %>
+
+<!-- 
+<%# unless @all_items.nil? || @all_items.empty? %>
   <table class="table table-striped">
     <thead>
       <tr>
         <th width="300">Name</th>
         <th width="100">Price</th>
         <th width="100">Units</th>
-        <% if controller.controller_name == 'orders' %>
+        <%# if controller.controller_name == 'orders' %>
           <th width="100">&nbsp;</th>
-        <% end %>
+        <%# end %>
       </tr>
     </thead>
     <tbody>
-      <% @all_items.each do |item| %>
+      <%# @all_items.each do |item| %>
         <tr>
-          <td><%= link_to item.name, item_path(item) %></td>
-          <td><%= number_to_currency item.current_price %></td>
-          <td><%= item.units_per_item %> <%= item.category == 'bread' ? 'loaf' : item.category %></td>
+          <td><%# link_to item.name, item_path(item) %></td>
+          <td><%# number_to_currency item.current_price %></td>
+          <td><%# item.units_per_item %> <%# item.category == 'bread' ? 'loaf' : item.category %></td>
           
-          <!--
-          <% if controller.controller_name == 'orders' %>
+          
+          <%# if controller.controller_name == 'orders' %>
             <td>
-              <%= link_to(add_to_cart_path(item.id), class: 'button tiny radius') do %>
+              <%# link_to(add_to_cart_path(item.id), class: 'button tiny radius') do %>
                 &nbsp;Add to Cart&nbsp;
-              <% end %>
+              <%# end %>
             </td>
-          <% end %>
-          -->
+          <%# end %>
+          
 
         </tr>
-      <% end %>
+      <%# end %>
     </tbody>
   </table><br>
-  <%= will_paginate @all_items, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
-<% end %>
+  <%# will_paginate @all_items, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<%# end %>
+-->

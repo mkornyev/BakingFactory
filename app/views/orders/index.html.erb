@@ -1,4 +1,56 @@
-<%= render partial: "partials/index_structure", locals: {model_name: "order", 
-                                                         primary: "all_orders", 
-                                                         secondary: nil,
-                                                         sidebar: nil} %>
+
+<div class="row" style="margin: 5%; margin-top: 10%;">
+	
+	<div class="col">
+		<h4>Order Management:</h4>
+		<p style="color: #999;">View your orders below.</p>
+	</div>
+
+</div>
+
+
+<div class="row", style="width: 100%; margin: 5%; margin-top: 10%">
+
+	<% if @orders.nil? || @orders.empty? %>
+	  <p>No orders in the system!</p>
+	<% else %>
+	  <div>
+	  <%= will_paginate @orders, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+	  </div>
+	  
+	  <table class="table table-striped" style="width: 90%; border: 1px dotted #007bff;">
+	    <thead>
+	      <tr>
+	        <th width="50">Date</th>
+	        <th width="50">Recipient</th>        
+	        <th width="50">Cost</th>            
+	        <th width="50">Items</th>  
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <% @orders.each do |order| %>
+	        <tr>
+	          <td><%= link_to order.date, order_path(order) %></td>
+	          <td><%= order.address.recipient %></td>
+	          <td><%= number_to_currency order.grand_total %></td>
+	          <td>
+	          	<% order.order_items.order(:id).each do |item| %> 
+	          	  <% if item == order.order_items.order(:id).last %>
+	          	  	<span><%= item.item.name %>. </span>
+	          	  <% else %>
+	          		<span><%= item.item.name %>, </span>
+	          	  <% end %>
+	          	<% end %> 
+	          </td>
+	        </tr>
+	      <% end %>
+	    </tbody>
+	  </table>
+	    
+	  <%= will_paginate @orders, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+	  
+	<% end %>
+
+</div> 
+
+	

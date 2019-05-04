@@ -11,7 +11,13 @@ class Customer < ApplicationRecord
   belongs_to :user
 
   # Allow user to be nested within customer
-  accepts_nested_attributes_for :user, reject_if: ->(user) { user[:username].blank? }, allow_destroy: true
+  # accepts_nested_attributes_for :user, reject_if: ->(user) { user[:username].blank? }, allow_destroy: true
+  attr_accessor :username, :password, :password_confirmation
+
+  # Searchability 
+  def self.search_by(term)
+    where(["LOWER(first_name) LIKE :term OR  LOWER(last_name) LIKE :term OR  LOWER(email) LIKE :term", { term: "%#{term.downcase}%", term: "%#{term.downcase}%", term: "%#{term.downcase}%" }])
+  end
 
   # Scopes
   scope :alphabetical,  -> { order(:last_name).order(:first_name) }

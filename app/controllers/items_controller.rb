@@ -1,16 +1,33 @@
-  class ItemsController < ApplicationController
+class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :check_login, except: [:index, :show]
   authorize_resource
   
   def index
-    # get info on active items for the big three...
-    @all_items = Item.active.alphabetical.text_search(params[:query]).paginate(:page => params[:page]).per_page(4)
-    @breads = Item.active.for_category('bread').alphabetical.paginate(:page => params[:page]).per_page(10)
-    @muffins = Item.active.for_category('muffins').alphabetical.paginate(:page => params[:page]).per_page(10)
-    @pastries = Item.active.for_category('pastries').alphabetical.paginate(:page => params[:page]).per_page(10)
-    # get a list of any inactive items for sidebar
-    @inactive_items = Item.inactive.alphabetical.paginate(:page => params[:page]).per_page(10)
+    # Search all items if :params present 
+    if (params[:search].present?) && !(["bread","muffins","pastries","inactive"].include?(params[:search]))
+      if logged_in? && current_user.role?(:admin)
+        @all_items = Item.all.alphabetical.search_by(params[:search]).paginate(:page => params[:page]).per_page(6)
+      else
+        @all_items = Item.active.alphabetical.search_by(params[:search]).paginate(:page => params[:page]).per_page(6)
+      end 
+    # Categories
+    elsif params[:search] == "bread"
+      @all_items = Item.active.alphabetical.for_category('bread').paginate(:page => params[:page]).per_page(6)
+    elsif params[:search] == "muffins"
+      @all_items = Item.active.alphabetical.for_category('muffins').paginate(:page => params[:page]).per_page(6)
+    elsif params[:search] == "pastries"
+      @all_items = Item.active.alphabetical.for_category('pastries').paginate(:page => params[:page]).per_page(6)
+    elsif params[:search] == "inactive" && logged_in? && current_user.role?(:admin)
+      @all_items = Item.inactive.alphabetical.paginate(:page => params[:page]).per_page(6)
+    else 
+      @all_items = Item.active.alphabetical.paginate(:page => params[:page]).per_page(6)
+      # @breads = Item.active.for_category('bread').alphabetical.search_by(params[:search]).paginate(:page => params[:page]).per_page(6)
+      # @muffins = Item.active.for_category('muffins').alphabetical.search_by(params[:search]).paginate(:page => params[:page]).per_page(6)
+      # @pastries = Item.active.for_category('pastries').alphabetical.search_by(params[:search]).paginate(:page => params[:page]).per_page(6)
+      # # get a list of any inactive items for sidebar
+      # @inactive_items = Item.inactive.alphabetical.search_by(params[:search]).paginate(:page => params[:page]).per_page(6)
+    end
   end
 
   def show
@@ -50,6 +67,7 @@
     @item.destroy
     redirect_to items_url, notice: "#{@item.name} was removed from the system."
   end
+
 
   private
   def set_item

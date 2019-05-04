@@ -1,11 +1,53 @@
 <div class="row">
-  <div class="small-7 columns">
-    <%= render :partial => "address_details" %>
-  </div>
-  <div class="small-5 columns">
-    &nbsp;
+  <div class="col" style="margin: 5%;">
+   
+    <div class="card mb-3">
+	  <div class="row no-gutters">
+		<div class="col-md-8">
+	  	<div class="card-body">
+	    	<h5 class="card-title"> Address Details</h5>
+	    	<p class="card-text">
+	    		<%= link_to @address.customer.name, customer_path(@address.customer) %> | <%= link_to @address.customer.email %> | <%= @address.customer.phone %>
+	        <br><hr><strong>Recipient:</strong>
+	        <p><%= @address.recipient %></p>
+	    	<strong>Street 1:</strong>
+	        <p><%= @address.street_1 %></p>
+	        <strong>Street 2:</strong>
+	        <% if @address.street_2.nil? %> 
+	        	<p>None</p>
+	        <% else %>
+	        	<p><%= @address.street_2 %></p>
+	        <% end %>
+	        <strong>City:</strong>
+	        <p><%= @address.city %></p>
+	        <strong>State:</strong>
+	        <p><%= @address.state %></p>
+	        <strong>ZIP:</strong>
+	        <p><%= @address.zip %></p>
+
+
+	        <strong>Billing:</strong>
+	        <p>
+	        	<% if @address.is_billing %> 
+	        	<i class='material-icons'>done</i>
+	        	<% else %>
+	        	<i class='material-icons'>clear</i>
+	        	<% end %>
+	        </p>
+	        <strong>Active:</strong>
+	        <p>
+	        	<% if @address.active %> 
+	        	<i class='material-icons'>done</i>
+	        	<% else %>
+	        	<i class='material-icons'>clear</i>
+	        	<% end %>
+	        </p>
+	        <%= link_to "All Addresses", addresses_path, class: "btn btn-outline-primary" %> 
+	        <%= link_to "Edit Address", edit_address_path(@address), class: "btn btn-outline-primary" %> 
+	  	</div>
+	  	</div>
+	  </div>
+	</div>
+
   </div>
 </div>
-
-<!-- Add buttons to list all, edit project or destroy object -->
-<%= render partial: "partials/object_options", locals: {model_name: "address", object: @address}  %>

@@ -1,10 +1,17 @@
-    <%= f.input :customer_id, collection: Customer.active.alphabetical, include_blank: true, input_html: {class: "avg"} %>
-
-    <%= f.input :recipient, input_html: {class: "avg"} %>
-    <%= f.input :street_1, input_html: {class: "avg"} %>
-    <%= f.input :street_2, input_html: {class: "avg"} %>
-    <%= f.input :city, input_html: {class: "avg"} %>
-    <%= f.input :state, collection: Address::STATES_LIST, include_blank: true, input_html: {class: "avg"} %>
-    <%= f.input :zip, input_html: {class: "avg"} %>
-    <%= f.input :is_billing, label: 'Billing? ' %>
-    <%= f.input :active %>
+	<%= f.label :customer %>
+    <%= f.select :customer_id, collection: Customer.active.alphabetical %>
+    <%= f.label :recipient %>
+    <%= f.text_field :recipient, class: "form-control" %>
+    <%= f.label :street_1 %>
+    <%= f.text_field :street_1, class: "form-control" %>
+    <%= f.label :street_2 %>
+    <%= f.text_field :street_2, class: "form-control" %>
+    <%= f.label :city %>
+    <%= f.text_field :city, class: "form-control" %>
+    <%= f.label :state %>
+    <%= select_tag :state, collection: Address::STATES_LIST, include_blank: true, class: "custom-select" %>
+    <%= f.label :zip %>
+    <%= f.text_field :zip, class: "form-control", maxlength: 5, minlength: 5 %>
+    
+    <%# f.input :is_billing, label: 'Billing? ' %>
+    <%# f.input :active %>

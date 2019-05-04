@@ -15,13 +15,13 @@
 
   <!-- Partials for the topbar and navigation -->
   <% if logged_in? && ( current_user.role?(:admin) ) %>
-    <%= render :partial => "partials/" %>
+    <%= render :partial => "partials/nav_admin" %>
   <% elsif logged_in? && ( current_user.role?(:baker) ) %>
-    <%= render :partial => "partials/" %>
-  <% elsif logged_in? && ( current_user.role?(:shipper) ) %>
-    <%= render :partial => "partials/" %>
-  <% elsif logged_in? && current_user.role?(:customer) %>
     <%= render :partial => "partials/nav_guest" %>
+  <% elsif logged_in? && ( current_user.role?(:shipper) ) %>
+    <%= render :partial => "partials/nav_guest" %>
+  <% elsif logged_in? && current_user.role?(:customer) %>
+    <%= render :partial => "partials/nav_customer" %>
   <% else %>
     <%= render :partial => "partials/nav_guest" %>
   <% end %>

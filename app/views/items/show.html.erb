@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col" style="margin: 5%;">
+   
+    <div class="card mb-3">
+	  <div class="row no-gutters">
+	    <div class="col-md-4" style="margin-right: -200px;">
+		  <% if @item.category == 'bread' %>
+	        <%= image_tag("bread.jpg", class: 'card-img-top', style: "height: 100%; width: 50%;")%>
+	      <% elsif @item.category == 'muffins' %>
+	        <%= image_tag("muffins.jpg", class: 'card-img-top', style: "height: 100%; width: 50%;" )%>
+	      <% elsif @item.category == 'pastries' %>
+	        <%= image_tag("pastries.jpg", class: 'card-img-top', style: "height: 100%; width: 50%;")%>
+	      <% end %>
+	    </div>
+		<div class="col-md-8">
+	  	<div class="card-body">
+	    	<h5 class="card-title">About <%= @item.name %></h5>
+	    	<p class="card-text">
+	    		<%= number_to_currency @item.current_price %> | <%= @item.units_per_item %> <%= @item.category == 'bread' ? 'loaf' : @item.category %> | <%= @item.weight %> lbs
+	        
+	        <br><hr><strong>Description:</strong>
+	        <p><%= @item.description %></p>
+	    	</p>
+	    	<%= link_to 'Edit Item', edit_item_path, class: "btn btn-outline-primary", style: "margin-bottom: 1%;" %>
+	  	</div>
+	  	</div>
+	  </div>
+	</div>
+
+	<% if logged_in? && current_user.role?(:admin) %>
+	<div class="card mb-3">
+	  <div class="card-body">
+	    <h5 class="card-title">Price History</h5>
+	    <p class="card-text">
+	    	<table class="table table-striped" style="width: 95%; border: 1px dotted #007bff;">
+			    <thead>
+			      <tr>
+			        <th width="50">Price</th>
+			        <th width="50">Effective as of</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <% @previous_prices.each do |price| %>
+			        <tr>
+			          <td><%= price.price %></td>
+			          <td><%= price.start_date.strftime("%B %d, %Y") %></td>
+			        </tr>
+			      <% end %>
+			    </tbody>
+			</table>
+	    </p>
+	    <% number_field(:new_price, min:0, precision: 2) %>
+	  </div>
+	</div>
+	<% end %> 
+
+	<div class="card mb-3">
+	  <div class="card-body">
+	    <h5 class="card-title">Related Items</h5>
+	    <p class="card-text">
+	    	<table class="table table-striped" style="width: 95%; border: 1px dotted #007bff;">
+			    <thead>
+			      <tr>
+			        <th width="50">Name</th>
+			        <th width="50">Price</th>
+			        <th width="50">Units</th>        
+			        <% if logged_in? && current_user.role?(:admin) %>
+				        <th width="50">Edit</th>       
+				        <th width="50">Delete</th>        
+			        <% end %> 
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <% @similar_items.each do |item| %>
+			        <tr>
+			          <td><%= link_to item.name, item_path(item) %></td>
+			          <td><%= number_to_currency item.current_price %></td>
+			          <td><%= item.units_per_item %> <%= item.category == 'bread' ? 'loaf' : item.category %></td>
+			          <% if logged_in? && current_user.role?(:admin) %>
+				          <td>
+				            <%= link_to edit_item_path(item) do %>
+				              <i class="material-icons">edit</i>
+				            <% end %>
+				          <td>
+				            <%= link_to(item_path(item), method: :delete, data: { confirm: 'Are you sure?' }) do %>
+				              <i class="material-icons">delete</i>
+				            <% end %>
+				          </td>
+				      <% end %> 
+			        </tr>
+			      <% end %>
+			    </tbody>
+			</table>
+	    </p>
+	    <%= link_to 'All Items', items_path, class: "btn btn-outline-primary", style: "margin-bottom: 1%;" %>
+	  </div>
+	</div>
+
+  </div>
+</div>

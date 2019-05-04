@@ -1,0 +1,17 @@
+<!-- NavBar --> 
+<div class="row navbar">
+<div class="col align-self-left text-left pl-4">
+  <!-- Logo -->
+  <%= link_to image_tag("logo.png"), :controller => 'home', :action => 'home' %>
+
+  <!-- Links -->
+  	<%# link_to 'Baked Goods', items_path %>
+    <a class="nav-link underline_effect" href="http://localhost:3000/items">Baked Goods</a>
+    <%= link_to "My Account", customer_path(current_user.customer), class: "nav-link underline_effect" %>
+
+    <!-- Logout -->
+    <div style="padding-left: 6px;">
+      <li style="font-size: .8em;" class="underline_effect"><%= link_to "Log Out", "http://localhost:3000/sessions/destroy" %></li>
+    </div>
+</div>
+</div>

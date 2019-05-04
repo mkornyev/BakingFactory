@@ -1,10 +1,78 @@
 <div class="row">
-  <div class="small-7 columns">
-    <%= render :partial => "order_details" %>
-  </div>
-  <div class="small-5 columns">
-    <%= render partial: "partials/previous_orders", locals: {previous_orders: @previous_orders}  unless @previous_orders.empty?%>
+  <div class="col" style="margin: 5%;">
+   
+    <div class="card mb-3">
+	  <div class="row no-gutters">
+		<div class="col-md-8">
+	  	<div class="card-body">
+	    	<h5 class="card-title"> Order Details</h5>
+	    	<p class="card-text">
+	    		<%= number_to_currency @order.grand_total %> | <%= @order.date.strftime("%B %d, %Y") %>
+	        <br><hr><strong>Customer:</strong>
+	        <p><%= link_to @order.customer.name, customer_path(@order.customer) %></p>
+	    	<strong>Address:</strong>
+	        <p><%= @order.address.street_1 %> <%= @order.address.street_2.nil? ? "" : @order.address.street_2 %> <%= @order.address.city %>, <%= @order.address.state %> <%= @order.address.zip %></p>
+	        <strong>Order Items:</strong>
+	        <p>
+	        	<table class="table table-striped" style="width: 95%; border: 1px dotted #007bff;">
+			    <thead>
+			      <tr>
+			        <th width="50">Item</th>
+			        <th width="50">Quantity</th>        
+			      </tr>
+			    </thead>
+			    <tbody>
+	        	<% @order.order_items.each do |oi| %>
+	        		<tr>
+	        			<td> <%= link_to oi.item.name, item_path(oi.item) %> </td>
+	        			<td><%= oi.quantity %></td>
+	        		</tr>
+	        	<% end %>
+	        	    </tbody>
+			</table>
+	        </p>
+	    	</p>
+	  	</div>
+	  	</div>
+	  </div>
+	</div>
+
+	<div class="card mb-3">
+	  <div class="card-body">
+	    <h5 class="card-title">Previous Orders</h5>
+	    <p class="card-text">
+	    	<table class="table table-striped" style="width: 95%; border: 1px dotted #007bff;">
+			    <thead>
+			      <tr>
+			        <th width="50">Date</th>
+			        <th width="50">Recipient</th>        
+			        <th width="50">Cost</th>            
+			        <th width="50">Items</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <% @previous_orders.each do |order| %>
+			        <tr>
+			          <td><%= link_to order.date, order_path(order) %></td>
+			          <td><%= order.address.recipient %></td>
+			          <td><%= number_to_currency order.grand_total %></td>
+			          <td>
+			          	<% order.order_items.order(:id).each do |item| %> 
+			          	  <% if item == order.order_items.order(:id).last %>
+			          	  	<span><%= item.item.name %>. </span>
+			          	  <% else %>
+			          		<span><%= item.item.name %>, </span>
+			          	  <% end %>
+			          	<% end %> 
+			          </td>
+			        </tr>
+			      <% end %>
+			    </tbody>
+			</table>
+	    </p>
+	    <%= link_to 'All Orders', orders_path, class: "btn btn-outline-primary", style: "margin-bottom: 1%;" %>
+	  </div>
+	</div>
+
   </div>
 </div>
-
-<%= render partial: "partials/object_options", locals: {model_name: "order", object: @order}  %>

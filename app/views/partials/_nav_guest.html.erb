@@ -2,15 +2,22 @@
 <div class="row navbar">
 <div class="col align-self-left text-left pl-4">
   <!-- Logo -->
-  <a href="home"><img src="assets/main/logo.png"></a>
+  <%= link_to image_tag("logo.png"), :controller => 'home', :action => 'home' %>
 
   <!-- Links -->
-    <a class="nav-link underline_effect" href="items">Baked Goods</a>
+  	<%# link_to 'Baked Goods', items_path %>
+    <a class="nav-link underline_effect" href="http://localhost:3000/items">Baked Goods</a>
+    
+    <div class="cart" style="text-align: center;">
+      <li class="underline_effect" style="font-size: .8em; text-align: center;">
+        <%= link_to 'Sign Up', new_customer_path %>
+      </li>
+    </div>
 
     <!-- Login -->
-    <div>
-      <!-- <li><%= link_to 'Login', login_path %></li> -->
-      <li class="underline_effect">Log In</li>
+    <div class="login" style="text-align: center; text-align: center;">
+      <li class="underline_effect" style="font-size: .8em;"><%= link_to 'Log In', login_path %>
+      </li>
     </div>
 </div>
 </div>

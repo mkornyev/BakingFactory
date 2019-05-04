@@ -1,0 +1,17 @@
+    <%= f.label :name %> 
+    <%= f.text_field :name, class: "form-control" %>
+    <%= f.label :description %> 
+    <%= f.text_field :description, class: "form-control" %>
+    
+    <hr><%= f.label :category %><br>
+    <%= f.radio_button('category', 'bread') %> Bread<br>
+    <%= f.radio_button('category', 'muffins') %> Muffin<br>
+    <%= f.radio_button('category', 'pastries') %> Pastry<hr>
+  
+    <%# f.select :category, options_for_select([['Bread','bread'],['Muffins','muffins'],['Pastries','pastries']]), {}, {class: "form-control", style: ""} %>
+    Units per Item 
+    <%= f.number_field :units_per_item, min: 0, class: "form-control", style: "width: 5%" %><br>
+    <%= f.label :weight %> (<em style="color: #ffc107">Pounds</em>)
+    <%= f.number_field :weight, min: 0, class: "form-control", style: "width: 5%" %><br>
+    <%= f.check_box :active, class: "form-control", style: "width: 2%; height: 16px; display: inline;", checked: true %> Make Item Active
+    

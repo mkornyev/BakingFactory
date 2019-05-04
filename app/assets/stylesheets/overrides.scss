@@ -84,7 +84,7 @@ div.post-parallax h4, {
 
 div.navbar {
   position: fixed;
-  z-index: 1; /*Send element to top*/
+  z-index: 5; /*Send element to top*/
   top: 0; 
   left: 0;
   right: 0;
@@ -207,8 +207,9 @@ div.navbar:hover img {
 div.footer {
   position: fixed;
   right: 0;
-  bottom: -20px;
+  bottom: 0px;
   left: 0;
+  z-index: 5; /*Send element to top*/
 
   padding: 0;
   text-align: center;

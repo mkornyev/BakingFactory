@@ -5,17 +5,9 @@ class Item < ApplicationRecord
   include AppHelpers::Activeable::InstanceMethods
   extend AppHelpers::Activeable::ClassMethods
 
-  # Searchability
-  include PgSearch 
-  pg_search_scope :search, against: [:name, :description] 
-
-  # pgSearch only if something is in the search bar 
-  def self.text_search(query)
-    if query.present? 
-      search(query)
-    else
-      return self
-    end
+  # Searchability 
+  def self.search_by(term)
+    where(["LOWER(name) LIKE :term OR  LOWER(description) LIKE :term", { term: "%#{term.downcase}%", term: "%#{term.downcase}%" }])
   end
 
   # List of allowable categories

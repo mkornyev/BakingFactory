@@ -1,4 +1,82 @@
-<%= render partial: "partials/index_structure", locals: {model_name: "customer", 
-                                                         primary: "active_customers", 
-                                                         secondary: nil,
-                                                         sidebar: "inactive_customers"} %>
+
+<div class="row" style="margin: 5%; margin-top: 10%;">
+	
+	<div class="col">
+		<h4>Customer Management:</h4>
+		<p style="color: #999;">Search by name with the toolbar on your right.</p>
+	</div>
+
+	<div class="col" style="width: 40%; float: right; position: absolute; right: 5%;">
+	<%= form_for "", :class => "form-inline", url: customers_path, role: 'search', method: :get do %>
+		<span>
+		<%= text_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>
+		</span>
+		<span style="float: right; margin-top: 1%;">
+		<%= submit_tag "Search",:class => "btn btn-warning", name: nil%>
+		</span> 
+		<a href="customers"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Show Me Everyone</button></a>
+		<a href="/customers?utf8=✓&search=active"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Active</button></a>
+		<a href="/customers?utf8=✓&search=inactive"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Inactive</button></a>
+	<% end %>
+	</div>
+</div>
+
+
+<div class="row", style="width: 100%; margin: 5%; margin-top: 10%">
+
+	<% if @customers.nil? || @customers.empty? %>
+	  <p>No customers in the system!</p>
+	<% else %>
+	  <div>
+	  <%= will_paginate @customers, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+	  </div>
+	  <div style="display: inline; margin-left: .5%; margin-bottom: 5px;">
+	    <%= link_to "Add a New Customer", new_customer_path, class: 'btn btn-primary' %> 
+	  </div>
+	  
+	  <table class="table table-striped" style="width: 90%; border: 1px dotted #007bff;">
+	    <thead>
+	      <tr>
+	        <th width="50">Name</th>
+	        <th width="50">Email</th>        
+	        <th width="50">Phone</th>            
+	        <th width="50">Active</th>  
+	        <th width="50">Toggle</th>  
+	        <th width="50">Edit</th>        
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <% @customers.each do |customer| %>
+	        <tr>
+	          <td><%= link_to customer.name, customer_path(customer) %></td>
+	          <td><%= mail_to(customer.email) %></td>
+	          <td><%= customer.phone %></td>
+	          <td>&nbsp;&nbsp;&nbsp;&nbsp;
+	          	<% if customer.active %>
+	          		<i class='material-icons'>done</i>
+	          	<% else %>
+	          	<% end %> 	
+	           </td>
+	          <td>&nbsp;&nbsp;&nbsp;
+	          	<%= button_to 'Toggle', toggle_path, method: :get %>
+	            
+	              <!-- <i class="material-icons">delete</i> -->
+	            
+	          </td>
+	          <td>
+	            <%= link_to edit_customer_path(customer) do %>
+	              <i class="material-icons">edit</i>
+	            <% end %>
+	          </td>
+	        </tr>
+	      <% end %>
+	    </tbody>
+	  </table>
+	    
+	  <%= will_paginate @customers, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+	  
+	<% end %>
+
+</div> 
+
+	

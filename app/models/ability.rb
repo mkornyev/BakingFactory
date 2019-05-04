@@ -36,7 +36,7 @@ class Ability
 
       # Can view their order items
       # !!!!!!! *THEIR* !!!!!!!!
-      can :read, OrderItems
+      # can :read, OrderItems
 
       # Can manage their account settings 
       can :manage, Customer do |cust|
@@ -64,6 +64,7 @@ class Ability
     else
       # GUEST 
       can :create, Customer 
+      can :create, User
     end
   end
 end

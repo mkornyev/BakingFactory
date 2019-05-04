@@ -1,4 +1,75 @@
-<%= render partial: "partials/index_structure", locals: {model_name: "address", 
-                                                         primary: "active_addresses", 
-                                                         secondary: "inactive_addresses", 
-                                                         sidebar: nil} %>
+
+<div class="row" style="margin: 5%; margin-top: 10%;">
+	
+	<div class="col">
+		<h4>Address Management:</h4>
+		<p style="color: #999;">View your addresses below.</p>
+	</div>
+
+</div>
+
+
+<div class="row", style="width: 100%; margin: 5%; margin-top: 10%">
+
+	<% if @active_addresses.nil? || @active_addresses.empty? %>
+	  <p>No Active Addresses</p>
+	<% else %>
+	  <div>
+	  <%= will_paginate @active_addresses, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+	  </div>
+	  <div style="display: inline; margin-left: .5%; margin-bottom: 5px;">
+	    <%= link_to "Add a New Address", new_address_path, class: 'btn btn-primary' %> 
+	  </div>
+	  
+	  <table class="table table-striped" style="width: 90%; border: 1px dotted #007bff;">
+	    <thead>
+	      <tr>
+	        <th width="50">Customer</th>
+	        <th width="50">Recipient</th>            
+	        <th width="50">Address</th> 
+	        <th width="50">Billing</th>         
+	        <th width="50">Active</th>  
+	        <th width="50">Edit</th> 
+	        <th width="50">Delete</th> 
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <% @active_addresses.each do |address| %>
+	        <tr>
+	          <td><%= link_to address.customer.name, customer_path(address.customer) %></td>
+	          <td><%= address.recipient %></td>
+	          <td><%= address.street_1 %> <%= address.street_2.nil? ? "" : address.street_2 %> <%= address.city %>, <%= address.state %> <%= address.zip %></td>
+	          <td>&nbsp;&nbsp;&nbsp;&nbsp;
+	          	<% if address.is_billing %>
+	          		<i class='material-icons'>done</i>
+	          	<% else %>
+	          	<% end %> 	
+	          </td>
+	          <td>&nbsp;&nbsp;&nbsp;&nbsp;
+	          	<% if address.active %>
+	          		<i class='material-icons'>done</i>
+	          	<% else %>
+	          	<% end %>
+	          </td>
+	          <td>&nbsp;
+	            <%= link_to edit_address_path(address) do %>
+	              <i class="material-icons">edit</i>
+	            <% end %>
+	          </td>
+	          <td>&nbsp;&nbsp;
+	            <%= link_to(address_path(address), method: :delete, data: { confirm: 'Are you sure?' }) do %>
+	              <i class="material-icons">delete</i>
+	            <% end %>
+	          </td>
+	        </tr>
+	      <% end %>
+	    </tbody>
+	  </table>
+	    
+	  <%= will_paginate @active_addresses, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+	  
+	<% end %>
+
+</div> 
+
+	

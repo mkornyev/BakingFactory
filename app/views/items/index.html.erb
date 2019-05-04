@@ -1,9 +1,41 @@
+
 <div class="row" style="margin: 5%; margin-top: 10%;">
-	<div class="search_section">
-		<%= form_tag items_path, method: :get do %>
-			<%= text_field_tag :query, params[:query] %>
-			<%= submit_tag "Search", name: nil%>
+	<% if logged_in? && current_user.role?(:admin) %>
+		<div class="col">
+			<h4>Item Management:</h4>
+			<p style="color: #999;">Toggle with the options to your right.</p>
+		</div>
+	<% else %>
+		<div>
+			<h4>Baked Goods:</h4>
+			<p style="color: #999;">Search for something specific with the toolbar on your right.</p>
+		</div> 
+	<% end %> 
+		<div class="col" style="width: 40%; float: right; position: absolute; right: 5%;">
+		<%= form_for "", :class => "form-inline", url: items_path, role: 'search', method: :get do %>
+			<span>
+			<%= text_field_tag :search, params[:search], placeholder: "Find me the best croissants in PA...", class: "form-control" %>
+			</span>
+			<span style="float: right; margin-top: 1%;">
+			<%= submit_tag "Search",:class => "btn btn-warning", name: nil%>
+			</span>
+			<a href="items"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Show Me Everything</button></a>
+			<a href="/items?utf8=✓&search=bread"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Bread</button></a>
+			<a href="/items?utf8=✓&search=muffins"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Muffins</button></a>
+			<a href="/items?utf8=✓&search=pastries"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Pastries</button></a>
+			<% if logged_in? && current_user.role?(:admin) %>
+			<a href="/items?utf8=✓&search=inactive"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Inactive Items</button></a>
+			<% end %>
 		<% end %>
-	</div>
-	<%= render :partial => "partials/item_list" %>
+		</div>
 </div>
+
+<% if logged_in? && current_user.role?(:admin) %>
+	<div class="row", style="width: 100%; margin: 5%; margin-top: 10%">
+	<%= render :partial => "partials/item_list_admin" %>
+	</div>
+<% else %> 
+	<div class="row", style="width: 100%; margin: 5%;">
+		<%= render :partial => "partials/item_list" %>
+	</div>
+<% end %> 

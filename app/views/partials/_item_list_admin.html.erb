@@ -1,0 +1,53 @@
+<% if @all_items.nil? || @all_items.empty? %>
+  <p>No items in the system!</p>
+<% else %>
+  <div>
+  <%= will_paginate @all_items, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+  </div>
+  <div style="display: inline; margin-left: .5%; margin-bottom: 5px;">
+    <%= link_to "Add a New Item", new_item_path, class: 'btn btn-primary' %> 
+  </div>
+  
+  <table class="table table-striped" style="width: 90%; border: 1px dotted #007bff;">
+    <thead>
+      <tr>
+        <th width="50">Name</th>
+        <th width="50">Price</th>
+        <th width="50">Units</th>        
+        <th width="50">Edit</th>       
+        <th width="50">Delete</th>        
+      </tr>
+    </thead>
+    <tbody>
+      <% @all_items.each do |item| %>
+        <tr>
+          <td><%= link_to item.name, item_path(item) %></td>
+          <td><%= number_to_currency item.current_price %></td>
+          <td><%= item.units_per_item %> <%= item.category == 'bread' ? 'loaf' : item.category %></td>
+          <td>
+            <%= link_to edit_item_path(item) do %>
+              <i class="material-icons">edit</i>
+            <% end %>
+          <td>
+            <%= link_to(item_path(item), method: :delete, data: { confirm: 'Are you sure?' }) do %>
+              <i class="material-icons">delete</i>
+            <% end %>
+          </td>
+          
+          <% if controller.controller_name == 'orders' %>
+            <td>
+              <%= link_to(add_to_cart_path(item.id), class: 'button tiny radius') do %>
+                &nbsp;Add to Cart&nbsp;
+              <% end %>
+            </td>
+          <% end %>
+          
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+    
+  <%= will_paginate @all_items, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+  
+<% end %>

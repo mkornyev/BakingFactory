@@ -20,6 +20,7 @@ module AppHelpers
         self.active = false
         self.save!
       end
+      
     end
   end
 end

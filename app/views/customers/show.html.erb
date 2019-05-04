@@ -1,11 +1,76 @@
 <div class="row">
-  <div class="small-7 columns">
-    <%= render partial: "customer_details" %>
-  </div>
-  <div class="small-5 columns">
-    <%= render partial: "partials/previous_orders", locals: {previous_orders: @previous_orders}  unless @previous_orders.empty?%>
+  <div class="col" style="margin: 5%;">
+   
+    <div class="card mb-3">
+	  <div class="row no-gutters">
+		<div class="col-md-8">
+	  	<div class="card-body">
+	    	<h5 class="card-title">Customer Details</h5>
+	        <strong>Name:</strong>
+	        <p><%= @customer.name %></p>
+	    	<strong>Email:</strong>
+	        <p><%= @customer.email %></p>
+	        <strong>Phone:</strong>
+	        <p><%= @customer.phone.insert(3, '-').insert(-5, '-') %></p>
+	        <strong>Username:</strong>
+	        <p><%= @customer.user.username %></p>
+	        <strong>Active:</strong>
+	        <% if @customer.active %> 
+	        	<p><i class='material-icons'>done</i></p>
+	        <% else %>
+	        	<p><i class='material-icons'>clear</i></p>
+	        <% end %>
+	        <% if logged_in? && current_user.role?(:admin) %>
+	        <%= link_to 'All Customers', customers_path, class: "btn btn-outline-primary" %> 
+	        <% end %>
+	        <%= link_to 'Edit Customer', edit_customer_path(@customer), class: "btn btn-outline-primary" %> 
+	  	</div>
+	  	</div>
+	  </div>
+	</div>
+
   </div>
 </div>
 
-<!-- Add buttons to list all, edit project or destroy object -->
-<%= render partial: "partials/object_options", locals: {model_name: "customer", object: @customer}  %>
+<div class="row">
+<div class="col" style="margin: 5%; margin-top: -5%;">
+	<div class="card mb-3">
+	  <div class="card-body">
+	    <h5 class="card-title">Order History</h5>
+	    <p class="card-text">
+	    	<table class="table table-striped" style="width: 95%; border: 1px dotted #007bff;">
+			    <thead>
+			      <tr>
+			        <th width="50">Date</th>
+			        <th width="50">Recipient</th>        
+			        <th width="50">Cost</th>            
+			        <th width="50">Items</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <% @previous_orders.each do |order| %>
+			        <tr>
+			          <td><%= link_to order.date, order_path(order) %></td>
+			          <td><%= order.address.recipient %></td>
+			          <td><%= number_to_currency order.grand_total %></td>
+			          <td>
+			          	<% order.order_items.order(:id).each do |item| %> 
+			          	  <% if item == order.order_items.order(:id).last %>
+			          	  	<span><%= item.item.name %>. </span>
+			          	  <% else %>
+			          		<span><%= item.item.name %>, </span>
+			          	  <% end %>
+			          	<% end %> 
+			          </td>
+			        </tr>
+			      <% end %>
+			    </tbody>
+			</table>
+	    </p>
+	    <% if logged_in? && current_user.role?(:admin) %>
+	    <%= link_to 'All Orders', orders_path, class: "btn btn-outline-primary", style: "margin-bottom: 1%;" %>
+	    <% end %>
+	  </div>
+	</div>
+</div>
+</div>

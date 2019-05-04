@@ -6,7 +6,7 @@ class CreateItems < ActiveRecord::Migration[5.1]
       t.string :category
       t.integer :units_per_item
       t.float :weight
-      t.boolean :active
+      t.boolean :active, default: true
 
       # t.timestamps
     end
