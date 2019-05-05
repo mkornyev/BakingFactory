@@ -1,6 +1,7 @@
 
 	Customer
-    <%= f.collection_select :customer, Customer.active.alphabetical, :name, :name, {}, {class: "form-control", style: "width: 20%;"} %>
+    <%= f.collection_select :customer_id, Customer.active.alphabetical, :name, :name, {}, {class: "form-control", style: "width: 20%;"} %>
+    <%# f.select(:customer_id, Customer.active.alphabetical, :prompt => "Please Select") %><br>
     Recipient
     <%= f.text_field :recipient, class: "form-control" %>
     Street 1

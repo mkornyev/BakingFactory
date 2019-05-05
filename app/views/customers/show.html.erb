@@ -33,6 +33,71 @@
 </div>
 
 <div class="row">
+  <div class="col" style="margin: 5%; margin-top: -5%;">
+   
+    <div class="card mb-3">
+	  <div class="row no-gutters">
+		<div class="col-md-8">
+	  	<div class="card-body">
+	    	<h5 class="card-title">Addresses</h5>
+	        <table class="table table-striped" style="width: 90%; border: 1px dotted #007bff;">
+				    <thead>
+				      <tr>
+				        <th width="50">Recipient</th>            
+				        <th width="50">Address</th> 
+				        <th width="50">Billing</th>         
+				        <th width="50">Active</th>  
+				        <th width="50">Edit</th> 
+				        <% if logged_in? && current_user.role?(:admin) %>
+				        	<th width="50">Delete</th> 
+				        <% else %>
+				        <% end %>
+				      </tr>
+				    </thead>
+				    <tbody>
+				      <% @addresses.each do |address| %>
+				        <tr>
+				          <td><%= address.recipient %></td>
+				          <td><%= address.street_1 %> <%= address.street_2.nil? ? "" : address.street_2 %> <%= address.city %>, <%= address.state %> <%= address.zip %></td>
+				          <td>&nbsp;&nbsp;&nbsp;&nbsp;
+				          	<% if address.is_billing %>
+				          		<i class='material-icons'>done</i>
+				          	<% else %>
+				          	<% end %> 	
+				          </td>
+				          <td>&nbsp;&nbsp;&nbsp;&nbsp;
+				          	<% if address.active %>
+				          		<i class='material-icons'>done</i>
+				          	<% else %>
+				          	<% end %>
+				          </td>
+				          <td>&nbsp;
+				            <%= link_to edit_address_path(address) do %>
+				              <i class="material-icons">edit</i>
+				            <% end %>
+				          </td>
+				          <% if logged_in? && current_user.role?(:admin) %>
+					          <td>&nbsp;&nbsp;
+					            <%= link_to(address_path(address), method: :delete, data: { confirm: 'Are you sure?' }) do %>
+					              <i class="material-icons">delete</i>
+					            <% end %>
+					          </td>
+					        <% else %>
+				        	<% end %>
+				        </tr>
+				      <% end %>
+				    </tbody>
+				  </table>
+				  <%= link_to 'Add an Address', new_address_path, class: "btn btn-outline-primary" %> 
+	  	</div>
+	  	</div>
+	  </div>
+	</div>
+
+  </div>
+</div>
+
+<div class="row">
 <div class="col" style="margin: 5%; margin-top: -5%;">
 	<div class="card mb-3">
 	  <div class="card-body">

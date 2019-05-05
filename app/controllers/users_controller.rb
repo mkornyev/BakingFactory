@@ -17,8 +17,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.role = params["user"]["role"]
     if @user.save
-      flash[:notice] = "Successfully added #{@user.proper_name} as a user."
+      flash[:notice] = "Successfully added #{@user.username} as a user."
       redirect_to users_url
     else
       render action: 'new'

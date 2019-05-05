@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   post "/remove_item", to: "cart_items#remove_item", as: "remove_item"
   post "/clear", to: "cart_items#clear", as: "clear"
   post "/place_order", to: "cart_items#place_order", as: "place_order"
+  post "/orders/new", to: 'orders#new', as: "place_new_order"
 
   # get 'customers/new', to: 'customers#new', as: :signup
   # get 'users/new', to: 'users#new', as: :signup

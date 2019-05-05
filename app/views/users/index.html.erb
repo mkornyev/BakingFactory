@@ -1,0 +1,61 @@
+
+<div class="row" style="margin: 5%; margin-top: 10%;">
+	
+	<div class="col">
+		<h4>User Management:</h4>
+		<p style="color: #999;">View system users below.</p>
+	</div>
+
+</div>
+
+
+<div class="row", style="width: 90%; margin: 5%; margin-top: 10%;  margin-top: 0%; border-top: 1px solid #a3a3a3; padding-top: 2%;">
+
+	<% if @users.nil? || @users.empty? %>
+	  <p style="padding-top: 20px">No users in the system!</p>
+	<% else %>
+	  <div>
+	  <%= will_paginate @users, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+	  </div>
+	  <div style="display: inline; margin-left: .5%; margin-bottom: 5px;">
+	    <%= link_to "Add a New User", new_user_path, class: 'btn btn-primary' %> 
+	  </div>
+	  
+	  <table class="table table-striped" style="width: 90%; border: 1px dotted #007bff;">
+	    <thead>
+	      <tr>
+	        <th width="50">Id</th>
+	        <th width="50">Username</th>        
+	        <th width="50">Role</th>            
+	        <th width="50">Active</th>  
+	        <th width="50">Edit</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <% @users.each do |user| %>
+	        <tr>
+	          <td><%= user.id %></td>
+	          <td><%= user.username %></td>
+	          <td><%= user.role %></td>
+	          <td>
+	          	<% if user.active %>
+	          	<i class="material-icons">done</i>
+	          	<% else %>
+	          	<% end %>
+	          </td>
+	          <td><%= link_to edit_user_path(user) do %>
+	              <i class="material-icons">edit</i>
+	            <% end %>
+	          </td>
+	        </tr>
+	      <% end %>
+	    </tbody>
+	  </table>
+	    
+	  <%= will_paginate @users, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+	  
+	<% end %>
+
+</div> 
+
+	

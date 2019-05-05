@@ -1,19 +1,43 @@
+<div class="row">
+  <div class="col" style="margin: 5%;">
+    <fieldset class="border mx-4 pl-3 mb-3">
+      <legend  class="w-auto">Place an Order with the Baking Factory</legend><br>
 
-<%= form_for @order do |f| %>
-  <fieldset>
-    <legend>Place an Order with the Baking Factory</legend>
+      <!-- Display Error -->
+      <% if @order.errors.any? %>
+        <% @order.errors.full_messages.each do |message| %>
+          <div class="alert-box <%= flash[:notice] ? "success" : "warning" %>">
+            <%= message %>
+          </div>
+        <% end %>
 
-    <% if @addresses.nil? %>
-      Your account has no associated addresses. <%= link_to 'Add one in your dashboard.', customer_path(@customer) %><br><br>
-    <% else %>
-      Select a Destination Address: 
-      <%=  %>
-      <%= f.collection_select :address, @addresses, :full_address, :full_address, {}, {class: "form-control", style: "width: 40%;"} %>    
-      <%= f.submit 'Place Order', :class => 'form-control' %>
-    <% end %> 
-    
-    <%= link_to 'Cancel', orders_path, :class => 'form-control' %>
+      <% end %>
 
-  </fieldset>
-<% end %>
+      <!-- customer_path(@customer) -->
 
+      <div class="form-group" style="margin-right: 5%;">
+        <%= form_for @order do |f| %>
+          <% if @addresses.nil? || (!@addresses.nil? && @addresses.empty?)  %>
+            Your account has no associated addresses. <%= link_to 'Add one in your dashboard.', home_path %><br><br>
+          <% else %>
+            Select a Destination Address:
+            <%= collection_select( :address_id, :address_id, @addresses, :id, :full_address, {}, {class: "form-control", style: "width: 40%;"}) %><br>
+            <%= collection_select( :customer_id, :id, @customer_collection, :id, :id, {}, {class: "form-control", style: "width: 40%; display: none;"}) %><br><hr>
+
+            Credit Card Number:
+            <%= f.text_field :credit_card_number, class: 'form-control' %>
+            Expiration Year:
+            <%= f.text_field :expiration_year, minlength: '4', maxlength: '4', class: 'form-control' %>
+            Expiration Month: 
+            <%= f.text_field :expiration_month, minlength: '2', maxlength: '2', class: 'form-control' %><br><hr>
+
+            Your total: <strong><%= @grand_total %></strong><br><br>
+            <%= f.submit 'Place My Order', :class => 'btn btn-warning' %>
+          <% end %> 
+        <% end %> 
+      </div>
+      <%= link_to 'Cancel', orders_path, :class => 'mb-2 btn btn-outline-warning' %>
+
+    </fieldset>
+  </div>
+</div>

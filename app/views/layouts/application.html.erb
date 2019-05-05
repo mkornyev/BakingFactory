@@ -17,9 +17,9 @@
   <% if logged_in? && ( current_user.role?(:admin) ) %>
     <%= render :partial => "partials/nav_admin" %>
   <% elsif logged_in? && ( current_user.role?(:baker) ) %>
-    <%= render :partial => "partials/nav_guest" %>
+    <%= render :partial => "partials/nav_baker" %>
   <% elsif logged_in? && ( current_user.role?(:shipper) ) %>
-    <%= render :partial => "partials/nav_guest" %>
+    <%= render :partial => "partials/nav_shipper" %>
   <% elsif logged_in? && current_user.role?(:customer) %>
     <%= render :partial => "partials/nav_customer" %>
   <% else %>

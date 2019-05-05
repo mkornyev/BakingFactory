@@ -19,6 +19,7 @@ class CustomersController < ApplicationController
 
   def show
     @previous_orders = @customer.orders.chronological
+    @addresses = @customer.addresses
   end
 
   def new

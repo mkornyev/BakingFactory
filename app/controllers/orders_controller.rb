@@ -16,18 +16,28 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @addresses = Address.where(customer_id: params[:customer_id])
+    @customer = Customer.where(id: params[:customer_id]).take
+    @customer_collection = Customer.where(id: params[:customer_id])
+    @grand_total = params[:grand_total]
+    # Save grand total for access in Create action
+    session[:grand_total] = params[:grand_total]
   end
 
   def create
-    # order_params = { customer_id: params[:customer_id], address_id: params[:address_id], grand_total: params[:grand_total] }
+    # byebug
+    order_params = { customer_id: params[:customer_id].values[0], address_id: params[:address_id].values[0], grand_total: session[:grand_total] }
     @order = Order.new(order_params)
     @order.date = Date.current
+    @order.credit_card_number = params[:order]["credit_card_number"]
+    @order.expiration_month = params[:order]["expiration_month"]
+    @order.expiration_year = params[:order]["expiration_year"]
     if @order.save
       @order.pay #Pay
       save_each_item_in_cart(@order) #Create order items for each order 
+      clear_cart #Clear the cart for new orders
       redirect_to @order, notice: "Thank you for ordering from the Baking Factory."
     else
-      render action: 'new'
+      redirect_to cart_path, notice: "Invalid credit card info provided. Try again."
     end
   end
   

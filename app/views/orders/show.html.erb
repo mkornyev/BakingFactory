@@ -70,7 +70,10 @@
 			    </tbody>
 			</table>
 	    </p>
+	    <% if logged_in? && current_user.role?(:admin) %>
 	    <%= link_to 'All Orders', orders_path, class: "btn btn-outline-primary", style: "margin-bottom: 1%;" %>
+	   	<% else %>
+	   	<% end %>
 	  </div>
 	</div>
 

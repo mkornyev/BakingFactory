@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col" style="margin: 5%;">
+    <fieldset class="border mx-4 pl-3 mb-3">
+      <legend  class="w-auto">Place an user with the Baking Factory</legend><br>
+
+      <!-- Display Error -->
+      <% if @user.errors.any? %>
+        <% @user.errors.full_messages.each do |message| %>
+          <div class="alert-box <%= flash[:notice] ? "success" : "warning" %>">
+            <%= message %>
+          </div>
+        <% end %>
+
+      <% end %>
+
+      <div class="form-group" style="margin-right: 5%;">
+        <%= form_for @user do |f| %>
+          <%= f.label :username %> 
+          <%= f.text_field :username, class: "form-control" %><br>
+          <%= f.label :role %> 
+          <%= f.collection_select :role, User::ROLES, :last, :last, {}, {class: "form-control", style: "width: 20%;"} %><br>
+          <%= f.label :password %> 
+          <%= f.password_field :password, class: "form-control" %><br>
+          <%= f.label "Confirm Password" %> 
+          <%= f.password_field :password_confirmation, class: "form-control" %><br>
+          <%= f.check_box :active, class: "form-control", style: "width: 2%; height: 16px; display: inline;" %> Make User Active<br><br>
+
+          <%= link_to 'Back', :back, :class => 'btn btn-outline-primary' %>
+          <%= f.submit 'Submit', :class => 'btn btn-primary' %>
+        <% end %> 
+      
+      </div>
+
+    </fieldset>
+  </div>
+</div>
