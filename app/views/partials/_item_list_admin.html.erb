@@ -1,10 +1,10 @@
 <% if @all_items.nil? || @all_items.empty? %>
-  <p>No items in the system!</p>
+  <p style="padding-top: 20px;">No items in the system!</p>
 <% else %>
-  <div>
+  <div style="padding-top: 2%;">
   <%= will_paginate @all_items, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
   </div>
-  <div style="display: inline; margin-left: .5%; margin-bottom: 5px;">
+  <div style="display: inline; margin-left: .5%; margin-bottom: 5px; padding-top: 2%;">
     <%= link_to "Add a New Item", new_item_path, class: 'btn btn-primary' %> 
   </div>
   
@@ -15,7 +15,8 @@
         <th width="50">Price</th>
         <th width="50">Units</th>        
         <th width="50">Edit</th>       
-        <th width="50">Delete</th>        
+        <th width="50">Delete</th>     
+        <th width="50">Add to Cart</th>        
       </tr>
     </thead>
     <tbody>
@@ -28,21 +29,16 @@
             <%= link_to edit_item_path(item) do %>
               <i class="material-icons">edit</i>
             <% end %>
-          <td>
+          </td>
+          <td>&nbsp;&nbsp;
             <%= link_to(item_path(item), method: :delete, data: { confirm: 'Are you sure?' }) do %>
               <i class="material-icons">delete</i>
             <% end %>
           </td>
           
-          <% if controller.controller_name == 'orders' %>
-            <td>
-              <%= link_to(add_to_cart_path(item.id), class: 'button tiny radius') do %>
-                &nbsp;Add to Cart&nbsp;
-              <% end %>
-            </td>
-          <% end %>
-          
-
+          <td>
+            <%= button_to '+', {:controller => "cart_items", :action => "add_item", :item_id => item.id}, :method=>:post, params: {item_id: item.id}, class: 'btn btn-primary', style: 'margin-left: 20%;' %>
+          </td>
         </tr>
       <% end %>
     </tbody>

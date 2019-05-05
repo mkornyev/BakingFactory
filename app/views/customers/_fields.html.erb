@@ -16,7 +16,7 @@
     <%= f.label :email %> 
     <%= f.text_field :email, class: "form-control" %><br>
     
-    <% if action_name == "new" %>
+    <% if logged_in? && current_user.role?(:admin) %>
     <hr>
     <!-- Also Render Nested User Fields -->
     <div class="form-group">
@@ -26,13 +26,11 @@
       <%= f.password_field :password, class: "form-control" %><br>
       <%= f.label "Confirm Password" %> 
       <%= f.password_field :password_confirmation, class: "form-control" %><br>
-      <% if logged_in? && current_user.role?(:admin) %>
-      <%= f.check_box :active, class: "form-control", style: "width: 2%; height: 16px; display: inline;", checked: true %> Make User Active<br>
-      <% end %> 
+      <%= f.check_box :active, class: "form-control", style: "width: 2%; height: 16px; display: inline;" %> Make User Active<br>
     </div>
     <% end %>
 
     <% if logged_in? && current_user.role?(:admin) %>
-    <%= f.check_box :active, class: "form-control", style: "width: 2%; height: 16px; display: inline;", checked: @customer.active %> Make Customer Active
+    <%= f.check_box :active, class: "form-control", style: "width: 2%; height: 16px; display: inline;" %> Make Customer Active
     <% end %>
 

@@ -3,11 +3,11 @@
       Nothing currently available. Try, try again!
       </div>
 <% else %>
-      <div class='row' style="color: #FFC107; padding-left: 0; margin-left: 36%;">
+      <div class='row' style="color: #FFC107; padding-left: 0; margin-left: 38.1%; padding-top: 2%;">
       <%= will_paginate @all_items, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
       </div>
       
-      <div class="row" style=" width: 92%; margin-left: 6%;">
+      <div class="row" style=" width: 92%; margin-left: 8.4%;">
       <% @all_items.each do |item| %>
 
       <!-- Modal (w/show trigger) -->
@@ -28,13 +28,14 @@
           <%= truncate item.description, length: 57 %> 
           </p>
           <%= link_to "See more", item_path(item), {:style=>'text-decoration: none;', :class => 'btn btn-outline-primary btn-md center-block' } %>
+          <%= button_to 'Add to Cart', {:controller => "cart_items", :action => "add_item", :item_id => item.id}, :method=>:post, params: {item_id: item.id}, class: "btn btn-primary", style: "margin-top: 5px;"  %>
         </div>
       </div>
 
       <% end %>
       </div>
 
-      <div class='row' style="color: #FFC107; padding-left: 0; margin-left: 36%;">
+      <div class='row' style="color: #FFC107; padding-left: 0; margin-left: 38.1%;">
       <%= will_paginate @all_items, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
       </div>
       

@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  include AppHelpers::Cart
+
   before_action :set_order, only: [:show, :destroy]
   before_action :check_login
   authorize_resource
@@ -13,13 +15,16 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @addresses = Address.where(customer_id: params[:customer_id])
   end
 
   def create
+    # order_params = { customer_id: params[:customer_id], address_id: params[:address_id], grand_total: params[:grand_total] }
     @order = Order.new(order_params)
     @order.date = Date.current
     if @order.save
-      @order.pay
+      @order.pay #Pay
+      save_each_item_in_cart(@order) #Create order items for each order 
       redirect_to @order, notice: "Thank you for ordering from the Baking Factory."
     else
       render action: 'new'

@@ -1,17 +1,22 @@
-	<%= f.label :customer %>
-    <%= f.select :customer_id, collection: Customer.active.alphabetical %>
-    <%= f.label :recipient %>
+
+	Customer
+    <%= f.collection_select :customer, Customer.active.alphabetical, :name, :name, {}, {class: "form-control", style: "width: 20%;"} %>
+    Recipient
     <%= f.text_field :recipient, class: "form-control" %>
-    <%= f.label :street_1 %>
+    Street 1
     <%= f.text_field :street_1, class: "form-control" %>
     <%= f.label :street_2 %>
     <%= f.text_field :street_2, class: "form-control" %>
     <%= f.label :city %>
     <%= f.text_field :city, class: "form-control" %>
     <%= f.label :state %>
-    <%= select_tag :state, collection: Address::STATES_LIST, include_blank: true, class: "custom-select" %>
-    <%= f.label :zip %>
-    <%= f.text_field :zip, class: "form-control", maxlength: 5, minlength: 5 %>
+    <%= f.collection_select :state, Address::STATES_LIST, :last, :last, {}, {class: "form-control", style: "width: 5%;"} %>
     
+    <%# select_tag :state, collection: Address::STATES_LIST, include_blank: true, class: "custom-select" %>
+    <%= f.label :zip %>
+    <%= f.text_field :zip, class: "form-control", maxlength: 5, minlength: 5 %><br>
+    
+    <%= f.check_box :is_billing, class: "form-control", style: "width: 2%; height: 16px; display: inline;" %> Make Billing Address
+    <%= f.check_box :active, class: "form-control", style: "width: 2%; height: 16px; display: inline;" %> Make Addresss Active
     <%# f.input :is_billing, label: 'Billing? ' %>
     <%# f.input :active %>

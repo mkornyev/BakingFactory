@@ -9,10 +9,10 @@
 </div>
 
 
-<div class="row", style="width: 100%; margin: 5%; margin-top: 10%">
+<div class="row", style="width: 100%; margin: 5%; margin-top: 10%;  margin-top: 0%; border-top: 1px solid #a3a3a3; padding-top: 2%;">
 
 	<% if @orders.nil? || @orders.empty? %>
-	  <p>No orders in the system!</p>
+	  <p style="padding-top: 20px">No orders in the system!</p>
 	<% else %>
 	  <div>
 	  <%= will_paginate @orders, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>

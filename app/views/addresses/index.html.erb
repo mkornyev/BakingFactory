@@ -9,10 +9,10 @@
 </div>
 
 
-<div class="row", style="width: 100%; margin: 5%; margin-top: 10%">
+<div class="row", style="width: 90%; margin: 5%; margin-top: 10%;  margin-top: 0%; border-top: 1px solid #a3a3a3; padding-top: 2%;">
 
 	<% if @active_addresses.nil? || @active_addresses.empty? %>
-	  <p>No Active Addresses</p>
+	  <p style="padding-top: 20px">No Active Addresses</p>
 	<% else %>
 	  <div>
 	  <%= will_paginate @active_addresses, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>

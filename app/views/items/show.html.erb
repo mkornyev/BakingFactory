@@ -21,7 +21,10 @@
 	        <br><hr><strong>Description:</strong>
 	        <p><%= @item.description %></p>
 	    	</p>
+	    	<% if logged_in? && current_user.role?(:admin) %>
 	    	<%= link_to 'Edit Item', edit_item_path, class: "btn btn-outline-primary", style: "margin-bottom: 1%;" %>
+	    	<% end %>
+	    	<%= button_to 'Add to Cart', {:controller => "cart_items", :action => "add_item", :item_id => @item.id}, :method=>:post, params: {item_id: @item.id}, class: "btn btn-primary", style: "margin-top: 5px;"  %>
 	  	</div>
 	  	</div>
 	  </div>

@@ -17,15 +17,13 @@ class Ability
     # BAKER 
     elsif user.role? :baker 
       # Can see baking list 
-      # !!!(ordered but not shipped)!!! 
-      can :index, OrderItem 
+      can :index, Order 
 
     # SHIPPER
     elsif user.role? :shipper
       # Can see orders
       can :index, Order
-      # and its items (ordered but not shipped) 
-      can :index, OrderItem
+      can :show, Order
       # along with other info
       can :read, Address 
       
@@ -34,17 +32,20 @@ class Ability
       # Can read item prices
       can :read, ItemPrice
 
-      # Can view their order items
-      # !!!!!!! *THEIR* !!!!!!!!
-      # can :read, OrderItems
-
       # Can manage their account settings 
       can :manage, Customer do |cust|
-        user.customer == cust 
+        user == cust.user 
+      end
+      can :show, User do |u|
+        user.id == u.id
+      end
+      can :update, User do |u|
+        user.id == u.id
       end
 
       # Can add an address 
       can :create, Address  
+      can :index, Address 
 
       # Can manage their addresses 
       can :manage, Address do |addy|
@@ -54,6 +55,10 @@ class Ability
 
       # Can create orders 
       can :create, Order 
+      can :index, Order 
+      can :checkout, Order 
+      can :create, Order 
+      can :add_to_cart, Order 
 
       # Can view their order history
       can :show, Order do |order|

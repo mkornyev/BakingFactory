@@ -22,10 +22,10 @@
 </div>
 
 
-<div class="row", style="width: 100%; margin: 5%; margin-top: 10%">
+<div class="row", style="width: 90%; margin: 5%; margin-top: 10%; margin-top: 0%; border-top: 1px solid #a3a3a3; padding-top: 2%;">
 
 	<% if @customers.nil? || @customers.empty? %>
-	  <p>No customers in the system!</p>
+	  <p style="padding-top: 20px">No customers in the system!</p>
 	<% else %>
 	  <div>
 	  <%= will_paginate @customers, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>

@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col" style="margin: 5%;">
+   
+    <div class="card mb-3">
+	  <div class="row no-gutters">
+		<div class="col-md-8">
+	  	<div class="card-body">
+	    	<h5 class="card-title">Your Cart</h5>
+
+	    	<% if @order_items.empty? %>
+	    	No items in cart.<br><br>
+	    	<% else %>
+	    	<table class="table table-striped" style="width: 90%; border: 1px dotted #007bff;">
+			    <thead>
+			      <tr>
+			        <th width="50">Name</th>
+			        <th width="50">Unit Price</th>
+			        <th width="50">Quantity</th>        
+			        <th width="50">Remove</th>     
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <% @order_items.each do |oi| %>
+			        <tr>
+			          <td><%= link_to oi.item.name, item_path(oi.item) %></td>
+			          <td>&nbsp;&nbsp;&nbsp;<%= number_to_currency oi.item.current_price %></td>
+			          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			          	<%= oi.quantity %>  
+			          </td>
+			          <td>
+			          	<%= button_to 'X', {:controller => "cart_items", :action => "remove_item", :item_id => oi.item_id}, :method=>:post, params: {item_id: oi.item_id}, class: "btn btn-primary", style: 'margin-left: 7%;'  %>
+			          </td>
+			        </tr>
+			      <% end %>
+			    </tbody>
+			  </table>
+
+			  <div style="width: 29.2%; margin-left: 10%;">
+			  <strong style="display: inline;">Subtotal:</strong>
+	          <p style="display: inline; float: right;"><%= number_to_currency @subtotal %></p><br>
+	          <strong style="display: inline;">Shipping:</strong>
+	          <p style="display: inline; position: absolute; right: 60.3%"><%= number_to_currency @shipping %></p><br>
+	          <strong style="display: inline;">Total:</strong>
+	          <p style="display: inline; position: absolute; right: 60.3%"><%= number_to_currency (@shipping + @subtotal) %></p><br><br>
+	      	  </div>
+
+
+	    <%= button_to 'Clear Cart', {:controller => "cart_items", :action => "clear" }, :method=>:post, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-warning", style: "margin-top: 5px;"  %>
+	    <%= button_to 'Place Order', {:controller => "orders", :action => "new", :customer_id => @customer.id, :grand_total => (@shipping + @subtotal) }, :method=>:post, params: {customer_id: @customer.id, grand_total: (@shipping + @subtotal)}, class: 'btn btn-warning', style: "margin-top: 5px;" %><br>
+	   	<% end %>
+	    
+
+        <%= link_to 'Back', :back, class: "btn btn-outline-primary" %> 
+        <%= link_to 'All Items', items_path, class: "btn btn-outline-primary" %> 
+
+	  	</div>
+	  	</div>
+	  </div>
+	</div>
+
+  </div>
+</div>

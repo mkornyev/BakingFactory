@@ -24,18 +24,18 @@
 			<a href="/items?utf8=✓&search=muffins"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Muffins</button></a>
 			<a href="/items?utf8=✓&search=pastries"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Pastries</button></a>
 			<% if logged_in? && current_user.role?(:admin) %>
-			<a href="/items?utf8=✓&search=inactive"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Inactive Items</button></a>
+			<a href="/items?utf8=✓&search=inactive"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 0%;">Inactive Items</button></a>
 			<% end %>
 		<% end %>
 		</div>
 </div>
 
 <% if logged_in? && current_user.role?(:admin) %>
-	<div class="row", style="width: 100%; margin: 5%; margin-top: 10%">
+	<div class="row", style="width: 90%; margin: 5%; margin-top: 0%; border-top: 1px solid #a3a3a3;">
 	<%= render :partial => "partials/item_list_admin" %>
 	</div>
 <% else %> 
-	<div class="row", style="width: 100%; margin: 5%;">
+	<div class="row", style="width: 90%; margin: 5%; margin-top: -2%; border-top: 1px solid #A3A3A3;">
 		<%= render :partial => "partials/item_list" %>
 	</div>
 <% end %> 

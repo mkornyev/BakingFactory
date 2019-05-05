@@ -31,6 +31,10 @@ class Address < ApplicationRecord
     Address.where(customer_id: self.customer_id, recipient: self.recipient, zip: self.zip).size == 1
   end
 
+  def full_address
+    "#{street_1}, #{street_2} #{city}, #{state} #{zip}"
+  end
+
   # Callbacks
   before_destroy do 
     check_if_ever_associated_with_an_order
