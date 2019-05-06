@@ -8,7 +8,7 @@ class CreateCustomers < ActiveRecord::Migration[5.1]
       t.references :user, foreign_key: true
       t.boolean :active, default: true
 
-      # t.timestamps
+      t.timestamps
     end
   end
 end

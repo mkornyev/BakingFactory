@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20190506042012) do
     t.string "phone"
     t.integer "user_id"
     t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
 

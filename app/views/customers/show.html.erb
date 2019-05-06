@@ -8,7 +8,11 @@
 	    	<h5 class="card-title">Customer Details</h5>
 	    	<p style="color: #a3a3a3;">View your addresses, orders, and recently ordered items below.</p>
 	        <strong>Name:</strong>
+	        <% if @customer.created_at.nil? %>
 	        <p><%= @customer.name %></p>
+	        <% else %>
+	        <p><%= @customer.name %><small class="text-muted">. A Baking Factory customer since <%= @customer.created_at.strftime('%m/%d/%Y') %></small></p>
+	        <% end %>
 	    	<strong>Email:</strong>
 	        <p><%= @customer.email %></p>
 	        <strong>Phone:</strong>

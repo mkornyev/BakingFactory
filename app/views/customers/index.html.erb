@@ -49,7 +49,7 @@
 	        <tr>
 	          <td><%= link_to customer.name, customer_path(customer) %></td>
 	          <td><%= mail_to(customer.email) %></td>
-	          <td><%= customer.phone %></td>
+	          <td><%= customer.phone.insert(3, '-').insert(-5, '-') %></td>
 	          <td>&nbsp;&nbsp;&nbsp;&nbsp;
 	          	<% if customer.active %>
 	          		<i class='material-icons'>done</i>
