@@ -8,6 +8,10 @@
 	    	<h5 class="card-title"> Order Details</h5>
 	    	<p class="card-text">
 	    		<%= number_to_currency @order.grand_total %> | <%= @order.date.strftime("%B %d, %Y") %>
+	    	<% if OrderItem.unshipped.map{|oi| oi.order_id}.include?(@order.id) %> 
+	          	| <em style="color: #ffc107;">Pending Shipment.</em>
+	        <% else %>
+	        <% end %>
 	        <br><hr><strong>Customer:</strong>
 	        <p><%= link_to @order.customer.name, customer_path(@order.customer) %></p>
 	    	<strong>Address:</strong>

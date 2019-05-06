@@ -24,6 +24,7 @@
 	        <th width="50">Date</th>
 	        <th width="50">Recipient</th>        
 	        <th width="50">Cost</th>            
+	        <th width="50">Pending</th>            
 	        <th width="50">Items</th>  
 	      </tr>
 	    </thead>
@@ -33,6 +34,12 @@
 	          <td><%= link_to order.date, order_path(order) %></td>
 	          <td><%= order.address.recipient %></td>
 	          <td><%= number_to_currency order.grand_total %></td>
+	          <td>&nbsp;&nbsp;&nbsp;
+	          	<% if OrderItem.unshipped.map{|oi| oi.order_id}.include?(order.id) %> 
+	          		<i class="material-icons">done</i>
+	          	<% else %>
+	          	<% end %>
+	          </td>
 	          <td>
 	          	<% order.order_items.order(:id).each do |item| %> 
 	          	  <% if item == order.order_items.order(:id).last %>

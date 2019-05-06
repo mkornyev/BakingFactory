@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col" style="margin: 5%;">
+   
+   	<h5 style="">Incoming Orders:</h5>
+   	<p style="color: #a3a3a3; padding-bottom: 3%; border-bottom: 1px solid #a3a3a3;">
+   		Use the packaging toggles to stage each item for shipping, and confirm with the ship button on your right.<br><br>
+   		Click the address to view additional customer contact information.
+   		<div style="position: relative; margin-left: 62%; margin-top: -6%;">
+   			<% if session[:shipped].empty? %>
+   			<%= button_to 'Ship Packaged Items', {:controller => "orders", :action => "ship_items", :submit => "true"}, :method=>:post, params: {submit: "true"}, class: 'btn-lg btn-warning', style: 'color: #a9a9a9;', disabled: true %>
+   			<% else %>
+   			<%= button_to 'Ship Packaged Items', {:controller => "orders", :action => "ship_items", :submit => "true"}, :method=>:post, params: {submit: "true"}, class: 'btn-lg btn-warning', style: '' %>
+   			<% end %>
+   		</div>
+   	</p>
+
+	<div class="card mb-3" style="margin-top: 3%;">
+	  <div class="card-body">
+
+	    <p class="card-text">
+	    	<table class="table table-striped" style="width: 95%; border: 1px dotted #007bff;">
+			    <thead>
+			      <tr>
+			        <th width="50">Order</th>
+			        <th width="50">Shipping Address</th>
+			        <th width="100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Items</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <% @orders.each do |o| %>
+			        <tr> 
+			          <td><%= link_to o.date, order_path(o) %></td>
+			          <td><%= link_to o.address.recipient + ", " + o.address.full_address, address_path(o.address) %></td>
+			          <td>
+			          	<ul>
+			          	<% @order_items.each do |oi| %>
+			          		<% if oi.order_id == o.id %>
+			          			<li><%= oi.item.name %> <strong>(<%= oi.quantity %>)</strong></li>
+							<div style="display: inline;">
+							<%= button_to '+', {:controller => "orders", :action => "add_shipping", :order_item_id => oi.id}, :method=>:post, params: {order_item_id: oi.id}, class: 'btn btn-primary', style: 'border-radius: 50px; height: 35px; width: 35px; position: relative; margin-left: 0%; margin-top: 5%;' %>
+							<%= button_to '-', {:controller => "orders", :action => "remove_shipping", :order_item_id => oi.id}, :method=>:post, params: {order_item_id: oi.id}, class: 'btn btn-primary', style: 'border-radius: 50px; height: 35px; width: 35px; position: relative; margin-top: -14.5%; margin-left: 9%;' %>
+							<% if session[:shipped].include?(oi.id.to_s) %>
+								<span class="btn btn-warning disabled" style='position: relative; margin-top: -26%; margin-left: 19%;'>Packaged</span>
+							<% else %>
+							<% end %>
+							</div>
+			          		<% else %>
+			          		<% end %>
+			          	<% end %>
+			          	</ul>
+				      </td>
+			        </tr>
+			      <% end %>
+			    </tbody>
+			</table>
+	    </p>
+	    <%= link_to 'All Items', items_path, class: "btn btn-outline-primary", style: "margin-bottom: 1%;" %>
+	  </div>
+	</div>
+
+  </div>
+</div>

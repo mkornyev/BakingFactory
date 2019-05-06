@@ -14,6 +14,8 @@
         <th width="50">Name</th>
         <th width="50">Price</th>
         <th width="50">Units</th>        
+        <th width="50">Active</th> 
+        <th width="50">Active Toggle</th> 
         <th width="50">Edit</th>       
         <th width="50">Delete</th>     
         <th width="50">Add to Cart</th>        
@@ -25,6 +27,15 @@
           <td><%= link_to item.name, item_path(item) %></td>
           <td><%= number_to_currency item.current_price %></td>
           <td><%= item.units_per_item %> <%= item.category == 'bread' ? 'loaf' : item.category %></td>
+          <td>&nbsp;&nbsp;
+            <% if item.active %>
+              <i class="material-icons">done</i>
+            <% else %>
+            <% end %>
+          </td>
+          <td>
+            <%= button_to 'Toggle', {:controller => "items", :action => "toggle", :item_id => item.id}, :method=>:post, params: {item_id: item.id}, class: 'btn btn-primary', style: 'margin-left: 10%;' %>
+          </td>
           <td>
             <%= link_to edit_item_path(item) do %>
               <i class="material-icons">edit</i>

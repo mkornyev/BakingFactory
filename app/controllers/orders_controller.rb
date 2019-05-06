@@ -3,7 +3,8 @@ class OrdersController < ApplicationController
 
   before_action :set_order, only: [:show, :destroy]
   before_action :check_login
-  authorize_resource
+  authorize_resource except: [:shipping, :add_shipping, :remove_shipping, :ship_items, :baking] 
+  
   
   def index
     @orders = Order.chronological.paginate(:page => params[:page]).per_page(10)
@@ -24,7 +25,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # byebug
     order_params = { customer_id: params[:customer_id].values[0], address_id: params[:address_id].values[0], grand_total: session[:grand_total] }
     @order = Order.new(order_params)
     @order.date = Date.current
@@ -40,7 +40,92 @@ class OrdersController < ApplicationController
       redirect_to cart_path, notice: "Invalid credit card info provided. Try again."
     end
   end
-  
+
+  # Baking actions
+  def baking
+    if params[:search] == "bread"
+      @item_quantities = Hash.new
+      OrderItem.unshipped.each do |oi|
+        if oi.item.category == "bread"
+          if @item_quantities[oi.item_id].nil? 
+            @item_quantities[oi.item_id] = oi.quantity
+          else 
+            @item_quantities[oi.item_id] = @item_quantities[oi.item_id] + oi.quantity
+          end
+        end
+      end
+    elsif params[:search] == "pastries"
+      @item_quantities = Hash.new
+      OrderItem.unshipped.each do |oi|
+        if oi.item.category == "pastries"
+          if @item_quantities[oi.item_id].nil? 
+            @item_quantities[oi.item_id] = oi.quantity
+          else 
+            @item_quantities[oi.item_id] = @item_quantities[oi.item_id] + oi.quantity
+          end
+        end
+      end
+    elsif params[:search] == "muffins"
+      @item_quantities = Hash.new
+      OrderItem.unshipped.each do |oi|
+        if oi.item.category == "muffins"
+          if @item_quantities[oi.item_id].nil? 
+            @item_quantities[oi.item_id] = oi.quantity
+          else 
+            @item_quantities[oi.item_id] = @item_quantities[oi.item_id] + oi.quantity
+          end
+        end
+      end
+    else
+      @item_quantities = Hash.new
+      OrderItem.unshipped.each do |oi|
+        if @item_quantities[oi.item_id].nil? 
+          @item_quantities[oi.item_id] = oi.quantity
+        else 
+          @item_quantities[oi.item_id] = @item_quantities[oi.item_id] + oi.quantity
+        end
+      end
+    end
+  end
+
+  # Shipping actions
+  def shipping 
+    #Create new view vars
+    @order_items = OrderItem.unshipped
+    @orders = @order_items.map{ |oi| oi.order }.uniq.sort()
+    # Set shipped hash if not yet set
+    if session[:shipped].nil? 
+      session[:shipped] = Array.new 
+    end
+  end
+
+  def add_shipping
+    if params[:order_item_id].present? && !session[:shipped].include?(params[:order_item_id]) 
+      session[:shipped] << params[:order_item_id] 
+    end
+    redirect_to shipping_path, notice: "Marked item as shipped."
+  end
+
+  def remove_shipping
+    if params[:order_item_id].present? && session[:shipped].include?(params[:order_item_id]) 
+      session[:shipped].delete(params[:order_item_id])
+    end
+    redirect_to shipping_path, notice: "Unmarked item as unshipped."
+  end
+
+  def ship_items
+    # If action is submit, ship items
+    if params[:submit] == "true" && !session[:shipped].nil?
+      session[:shipped].each do |oi_id|
+        item = OrderItem.where(id: oi_id).take
+        item.shipped_on = Date.today
+        item.save!
+      end
+      # Reset boxed items 
+      session[:shipped] = Array.new 
+    end
+    redirect_to shipping_path
+  end
 
   private
   def set_order

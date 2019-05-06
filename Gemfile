@@ -30,6 +30,10 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'morrisjs-rails'
+gem 'raphael-rails'
+gem 'time_difference'
+
 ##########
 # MY GEMS 
 

@@ -1,5 +1,11 @@
 <section id="parallax">
-		<h2 class="p-5">Welcome to the <em style="color: #ffc107;">Baking Factory</em><br></h2>
+		<% if logged_in? && ( current_user.role?(:customer) ) %>
+			<h2 class="p-5">Hello <%= current_user.customer.first_name %>, welcome to the <em style="color: #ffc107;">Baking Factory</em><br></h2>
+		<% elsif logged_in? %>
+			<h2 class="p-5">Hello <%= current_user.username %>, welcome to the <em style="color: #ffc107;">Baking Factory</em><br></h2>
+		<% else %>
+			<h2 class="p-5">Welcome to the <em style="color: #ffc107;">Baking Factory</em><br></h2>
+		<% end %>
 		<p>When Alex and Mark founded the Baking Factory in 2019, they did it with the<br>goal of bringing you the freshest possible bread.<br><br>
 		The Baking Factory guarantees that each of our baked goods will be<br>made fresh at our mother location in Pittsburgh, PA.<br><br>
 		<a href="items">Check out some of our goods here. </a></p>

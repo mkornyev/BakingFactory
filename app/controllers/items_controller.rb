@@ -68,6 +68,29 @@ class ItemsController < ApplicationController
     redirect_to items_url, notice: "#{@item.name} was removed from the system."
   end
 
+  def toggle
+    # Toggle Check
+    if params[:item_id].present? 
+      path_var = request.referrer.split("/").last
+      item = Item.find(params[:item_id])
+
+      if item.active 
+        item.make_inactive
+        if path_var == "items" || path_var.include?("page")
+          redirect_to items_path, notice: "Item made inactive."
+        else 
+          redirect_to item_path(Item.where(id: params[:item_id]).take), notice: "Item made inactive."
+        end
+      else 
+        item.make_active 
+        if path_var == "items" || path_var.include?("page")
+          redirect_to items_path, notice: "Item made active."
+        else 
+          redirect_to item_path(Item.where(id: params[:item_id]).take), notice: "Item made active."
+        end
+      end
+    end 
+  end
 
   private
   def set_item

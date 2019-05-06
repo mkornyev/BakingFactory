@@ -14,7 +14,7 @@ class CartItemsController < ApplicationController
 		add_item_to_cart(params[:item_id])
 
 		path_var = request.referrer.split("/").last
-		if path_var == "items"
+		if path_var == "items" || path_var.include?("page")
 			redirect_to items_path
 		else 
 			redirect_to item_path(Item.where(id: path_var).take)

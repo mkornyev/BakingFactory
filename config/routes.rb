@@ -22,9 +22,6 @@ Rails.application.routes.draw do
   get "sessions/create" 
   get "sessions/destroy"
 
-  # Special route for changing price 
-  get "/toggle", to: "customers#toggle_activity", as: "toggle"
-
   # Special route for cart functions 
   get "/cart", to: "cart_items#show", as: "cart"
   post "/add_item", to: "cart_items#add_item", as: "add_item"
@@ -32,6 +29,23 @@ Rails.application.routes.draw do
   post "/clear", to: "cart_items#clear", as: "clear"
   post "/place_order", to: "cart_items#place_order", as: "place_order"
   post "/orders/new", to: 'orders#new', as: "place_new_order"
+
+  # Shipping list
+  get "/shipping", to: "orders#shipping", as: "shipping"
+  post "/add_shipping", to: "orders#add_shipping", as: "add_shipping"
+  post "/remove_shipping", to: "orders#remove_shipping", as: "remove_shipping"
+  post "/ship_items", to: "orders#ship_items", as: "ship_items"
+
+  # Baking List
+  get "/baking", to: "orders#baking", as: "baking"
+
+  # Item toggle
+  post "/toggle", to: "items#toggle", as: "toggle"
+
+  # Admin Dash
+  get "/sales_dash", to: "home#sales_dash", as: "sales_dash"
+  get "/customer_dash", to: "home#customer_dash", as: "customer_dash"
+  get "/item_dash", to: "home#item_dash", as: "item_dash"
 
   # get 'customers/new', to: 'customers#new', as: :signup
   # get 'users/new', to: 'users#new', as: :signup

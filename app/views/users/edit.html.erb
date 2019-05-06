@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col" style="margin: 5%;">
     <fieldset class="border mx-4 pl-3 mb-3">
-      <legend  class="w-auto">Create a new user.</legend><br>
+      <legend  class="w-auto">Edit user '<%= @user.username %>'</legend><br>
 
-      <!-- Display Error -->
+      <!-- Display Error --> 
       <% if @user.errors.any? %>
         <% @user.errors.full_messages.each do |message| %>
           <div class="alert-box <%= flash[:notice] ? "success" : "warning" %>">

@@ -1,0 +1,49 @@
+<div class="row"> 
+  <div class="col" style="margin: 5%;">
+   
+   	<div>
+	   	<h5 style="">Baking List:</h5>
+	   	<p style="color: #a3a3a3;">
+	   		View ordered but unshipped items:
+	   	</p>
+   	</div>
+
+   	<div class="col" style="width: 40%; float: right; position: absolute; right: 5%; top: 0%;">
+		<%= form_for "", :class => "form-inline", url: baking_path, role: 'search', method: :get do %>
+			<a href="baking"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Show Me Everything</button></a>
+			<a href="/baking?utf8=✓&search=bread"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Bread</button></a>
+			<a href="/baking?utf8=✓&search=muffins"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Muffins</button></a>
+			<a href="/baking?utf8=✓&search=pastries"><button type="button" class="btn btn-outline-warning" style="float: right; margin-top: 1%; margin-right: 1%;">Pastries</button></a>
+		<% end %>
+	</div>
+
+	<div class="card mb-3" style="margin-top: 3%;">
+	  <div class="card-body">
+
+	    <p class="card-text">
+	    	<% if @item_quantities.length == 0 %>
+	    		No items to bake.
+	    	<% else %>
+	    	<table class="table table-striped" style="width: 95%; border: 1px dotted #007bff;">
+			    <thead>
+			      <tr>
+			        <th width="50">Item</th>
+			        <th width="50">Quantity</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <% @item_quantities.each do |oi, q| %>
+			        <tr> 
+			          <td><%= link_to Item.find(oi).name, item_path(Item.find(oi)) %></td>
+			          <td><%= q %></td>
+			        </tr>
+			      <% end %>
+			    </tbody>
+			</table>
+			<% end %>
+	    </p>
+	  </div>
+	</div>
+
+  </div>
+</div>

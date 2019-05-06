@@ -14,7 +14,13 @@ class SessionsController < ApplicationController
         create_cart 
       end
 
-      redirect_to home_path, notice: "Logged in!"
+      if ( current_user.role?(:shipper) )
+        redirect_to shipping_path, notice: "Logged in!"
+      elsif ( current_user.role?(:baker) )
+        redirect_to baking_path, notice: "Logged in!"
+      else
+        redirect_to home_path, notice: "Logged in!"
+      end
     else
       flash.now.alert = "Username and/or password is invalid"
       render "new"

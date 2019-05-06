@@ -13,12 +13,15 @@
 
       <% end %>
 
-      <!-- customer_path(@customer) -->
 
       <div class="form-group" style="margin-right: 5%;">
         <%= form_for @order do |f| %>
           <% if @addresses.nil? || (!@addresses.nil? && @addresses.empty?)  %>
-            Your account has no associated addresses. <%= link_to 'Add one in your dashboard.', home_path %><br><br>
+            Your account has no associated addresses. 
+            <% if @customer.nil? %> 
+            <% else %>
+              <%= link_to 'Add one in your dashboard.', customer_path(@customer) %><br><br>
+            <% end %>
           <% else %>
             Select a Destination Address:
             <%= collection_select( :address_id, :address_id, @addresses, :id, :full_address, {}, {class: "form-control", style: "width: 40%;"}) %><br>

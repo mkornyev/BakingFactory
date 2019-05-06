@@ -44,6 +44,11 @@ class AddressesController < ApplicationController
     end
   end
 
+  def destroy
+    @address.destroy
+    redirect_to addresses_url, notice: "Address '#{@address.full_address}' was removed from the system."
+  end
+
 
   private
   def set_address

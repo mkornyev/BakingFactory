@@ -40,8 +40,7 @@
 	        <th width="50">Name</th>
 	        <th width="50">Email</th>        
 	        <th width="50">Phone</th>            
-	        <th width="50">Active</th>  
-	        <th width="50">Toggle</th>  
+	        <th width="50">Active</th>   
 	        <th width="50">Edit</th>        
 	      </tr>
 	    </thead>
@@ -57,12 +56,6 @@
 	          	<% else %>
 	          	<% end %> 	
 	           </td>
-	          <td>&nbsp;&nbsp;&nbsp;
-	          	<%= button_to 'Toggle', toggle_path, method: :get %>
-	            
-	              <!-- <i class="material-icons">delete</i> -->
-	            
-	          </td>
 	          <td>
 	            <%= link_to edit_customer_path(customer) do %>
 	              <i class="material-icons">edit</i>

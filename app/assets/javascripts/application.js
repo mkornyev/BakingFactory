@@ -12,7 +12,8 @@
 //
 //= require jquery
 //= require rails-ujs
-
+//= require raphael
+//= require morris
 
 //= require_tree .
 
@@ -26,3 +27,4 @@ $(function() {
      $(this).delay(3700).fadeOut();
   });
 });
+

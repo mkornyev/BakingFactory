@@ -28,7 +28,10 @@
           <%= truncate item.description, length: 57 %> 
           </p>
           <%= link_to "See more", item_path(item), {:style=>'text-decoration: none;', :class => 'btn btn-outline-primary btn-md center-block' } %>
-          <%= button_to 'Add to Cart', {:controller => "cart_items", :action => "add_item", :item_id => item.id}, :method=>:post, params: {item_id: item.id}, class: "btn btn-primary", style: "margin-top: 5px;"  %>
+          <% if logged_in? && (current_user.role?(:admin) || current_user.role?(:customer)) %>
+            <%= button_to 'Add to Cart', {:controller => "cart_items", :action => "add_item", :item_id => item.id}, :method=>:post, params: {item_id: item.id}, class: "btn btn-primary", style: "margin-top: 5px;"  %>
+          <% else %>
+          <% end %> 
         </div>
       </div>
 
