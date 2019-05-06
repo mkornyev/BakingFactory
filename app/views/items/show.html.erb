@@ -4,13 +4,17 @@
     <div class="card mb-3">
 	  <div class="row no-gutters">
 	    <div class="col-md-4" style="margin-right: -200px;">
-		  <% if @item.category == 'bread' %>
-	        <%= image_tag("bread.jpg", class: 'card-img-top', style: "height: 100%; width: 50%;")%>
-	      <% elsif @item.category == 'muffins' %>
-	        <%= image_tag("muffins.jpg", class: 'card-img-top', style: "height: 100%; width: 50%;" )%>
-	      <% elsif @item.category == 'pastries' %>
-	        <%= image_tag("pastries.jpg", class: 'card-img-top', style: "height: 100%; width: 50%;")%>
-	      <% end %>
+	      <% if !@item.picture.nil? %>
+	      	<%= image_tag @item.picture, class: 'card-img-top', style: "height: 100%; width: 50%;"%>
+	      <% else %>
+			  <% if @item.category == 'bread' %>
+		        <%= image_tag("bread.jpg", class: 'card-img-top', style: "height: 100%; width: 50%;")%>
+		      <% elsif @item.category == 'muffins' %>
+		        <%= image_tag("muffins.jpg", class: 'card-img-top', style: "height: 100%; width: 50%;" )%>
+		      <% elsif @item.category == 'pastries' %>
+		        <%= image_tag("pastries.jpg", class: 'card-img-top', style: "height: 100%; width: 50%;")%>
+		      <% end %>
+		  <% end %>
 	    </div>
 		<div class="col-md-8">
 	  	<div class="card-body">
@@ -28,6 +32,7 @@
 		    	<% else %>
 			    	<%= button_to 'Make Active', {:controller => "items", :action => "toggle", :item_id => @item.id}, :method=>:post, params: {item_id: @item.id}, class: 'btn btn-primary', style: 'margin-left: 12%; margin-top: -9.2%;' %>
 		    	<% end %>
+		    	<% if @item.active %>
 		    	<%= form_for "", :class => "form-inline", url: item_path(@item), role: 'new_price', method: :get do %>
 					<span>
 					<%= text_field_tag :new_price, params[:new_price], placeholder: "Enter a new price", class: "form-control", style: 'width: 20%; margin-top: -2%;' %>
@@ -35,6 +40,9 @@
 					<span>
 					<%= submit_tag "Update Price",:class => "btn btn-outline-warning", name: nil, style: 'margin-left: 21%; margin-top: -7.2%;' %>
 					</span>
+				<% end %>
+				<% else %>
+				<p style="color: #a3a3a3;">Make the item active to add a new price.</p>
 				<% end %>
 	    	<% end %>
 	    	<% if logged_in? && (current_user.role?(:admin) || current_user.role?(:customer)) %>

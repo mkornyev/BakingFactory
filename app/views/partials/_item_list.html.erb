@@ -13,13 +13,17 @@
       <!-- Modal (w/show trigger) -->
       <div class="card" style="width: 18rem; margin: 3%;">
 
-        <% if item.category == 'bread' %>
-          <%= image_tag("bread.jpg", class: 'card-img-top')%>
-        <% elsif item.category == 'muffins' %>
-          <%= image_tag("muffins.jpg", class: 'card-img-top' )%>
+        <% if !item.picture.nil? %>
+          <%= image_tag item.picture, class: 'card-img-top', style: "height: 59%; width: 100%;"%>
         <% else %>
-          <%= image_tag("pastries.jpg", class: 'card-img-top')%>
-        <% end %>
+        <% if item.category == 'bread' %>
+            <%= image_tag("bread.jpg", class: 'card-img-top', style: "")%>
+          <% elsif item.category == 'muffins' %>
+            <%= image_tag("muffins.jpg", class: 'card-img-top', style: "" )%>
+          <% elsif item.category == 'pastries' %>
+            <%= image_tag("pastries.jpg", class: 'card-img-top', style: "")%>
+          <% end %>
+      <% end %>
           
         <div class="card-body">
           <h5 class="card-title"><%= item.name %></h5>

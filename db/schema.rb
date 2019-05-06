@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190107145242) do
+ActiveRecord::Schema.define(version: 20190506042012) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "customer_id"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20190107145242) do
     t.string "city"
     t.string "state"
     t.string "zip"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.index ["customer_id"], name: "index_addresses_on_customer_id"
   end
 
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20190107145242) do
     t.string "email"
     t.string "phone"
     t.integer "user_id"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
@@ -49,7 +49,8 @@ ActiveRecord::Schema.define(version: 20190107145242) do
     t.string "category"
     t.integer "units_per_item"
     t.float "weight"
-    t.boolean "active"
+    t.boolean "active", default: true
+    t.string "picture"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -75,7 +76,7 @@ ActiveRecord::Schema.define(version: 20190107145242) do
     t.string "username"
     t.string "password_digest"
     t.string "role"
-    t.boolean "active"
+    t.boolean "active", default: true
   end
 
 end
