@@ -1,6 +1,6 @@
 Baking Factory
 ---
-This will be the starter code for the course project in 67-272: Application Design and Development.  More notes will follow depending on the phase of the project.
+Welcome to the Baking Factory, a bread marketplace similar to the likes of Amazon.
 
 # Setup
 1. Run `bundle install`
