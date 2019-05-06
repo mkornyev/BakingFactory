@@ -28,9 +28,9 @@
 	    	<% if logged_in? && current_user.role?(:admin) %>
 	    		<%= link_to 'Edit Item', edit_item_path(@item), class: "btn btn-outline-primary", style: "margin-bottom: 1%;" %>
 		    	<% if @item.active %>
-			    	<%= button_to 'Make Inactive', {:controller => "items", :action => "toggle", :item_id => @item.id}, :method=>:post, params: {item_id: @item.id}, class: 'btn btn-primary', style: 'margin-left: 12%; margin-top: -9.2%;' %>
+			    	<%= button_to 'Make Inactive', {:controller => "items", :action => "toggle", :item_id => @item.id}, :method=>:post, params: {item_id: @item.id}, class: 'btn btn-primary', style: 'margin-left: 12%; margin-top: -10%;' %>
 		    	<% else %>
-			    	<%= button_to 'Make Active', {:controller => "items", :action => "toggle", :item_id => @item.id}, :method=>:post, params: {item_id: @item.id}, class: 'btn btn-primary', style: 'margin-left: 12%; margin-top: -9.2%;' %>
+			    	<%= button_to 'Make Active', {:controller => "items", :action => "toggle", :item_id => @item.id}, :method=>:post, params: {item_id: @item.id}, class: 'btn btn-primary', style: 'margin-left: 12%; margin-top: -10%;' %>
 		    	<% end %>
 		    	<% if @item.active %>
 		    	<%= form_for "", :class => "form-inline", url: item_path(@item), role: 'new_price', method: :get do %>
@@ -38,7 +38,7 @@
 					<%= text_field_tag :new_price, params[:new_price], placeholder: "Enter a new price", class: "form-control", style: 'width: 20%; margin-top: -2%;' %>
 					</span>
 					<span>
-					<%= submit_tag "Update Price",:class => "btn btn-outline-warning", name: nil, style: 'margin-left: 21%; margin-top: -7.2%;' %>
+					<%= submit_tag "Update Price",:class => "btn btn-outline-warning", name: nil, style: 'margin-left: 21%; margin-top: -7.8%;' %>
 					</span>
 				<% end %>
 				<% else %>

@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
       clear_cart #Clear the cart for new orders
       redirect_to @order, notice: "Thank you for ordering from the Baking Factory."
     else
-      redirect_to cart_path, notice: "Invalid credit card info provided. Try again."
+      redirect_to request.referrer, notice: "Invalid credit card info provided. Try again."
     end
   end
 

@@ -18,6 +18,9 @@
 	  <div class="card-body">
 
 	    <p class="card-text">
+	    	<% if @orders.empty? %>
+			    <p>There are no orders to ship. Add a new one to the system first.</p>
+			<% else %>
 	    	<table class="table table-striped" style="width: 95%; border: 1px dotted #007bff;">
 			    <thead>
 			      <tr>
@@ -37,10 +40,19 @@
 			          		<% if oi.order_id == o.id %>
 			          			<li><%= oi.item.name %> <strong>(<%= oi.quantity %>)</strong></li>
 							<div style="display: inline;">
-							<%= button_to '+', {:controller => "orders", :action => "add_shipping", :order_item_id => oi.id}, :method=>:post, params: {order_item_id: oi.id}, class: 'btn btn-primary', style: 'border-radius: 50px; height: 35px; width: 35px; position: relative; margin-left: 0%; margin-top: 5%;' %>
-							<%= button_to '-', {:controller => "orders", :action => "remove_shipping", :order_item_id => oi.id}, :method=>:post, params: {order_item_id: oi.id}, class: 'btn btn-primary', style: 'border-radius: 50px; height: 35px; width: 35px; position: relative; margin-top: -14.5%; margin-left: 9%;' %>
+							<div style="width: 13%; position: relative; margin-top: 3%; margin-left: 0%;">
+							<%= button_to '+', {:controller => "orders", :action => "add_shipping", :order_item_id => oi.id}, :method=>:post, params: {order_item_id: oi.id}, class: 'btn btn-primary', style: 'border-radius: 50px; height: 35px; width: 35px;' %>
+							</div>
+							<!-- position: relative; margin-left: 0%; margin-top: 5%; -->
+							<div style="width: 13%; position: relative; margin-top: -11.7%; margin-left: 13%;">
+							<%= button_to '-', {:controller => "orders", :action => "remove_shipping", :order_item_id => oi.id}, :method=>:post, params: {order_item_id: oi.id}, class: 'btn btn-primary', style: 'border-radius: 50px; height: 35px; width: 35px;' %>
+							</div>
+							<!-- position: relative; margin-top: -17.5%; margin-left: 12%; -->
 							<% if session[:shipped].include?(oi.id.to_s) %>
-								<span class="btn btn-warning disabled" style='position: relative; margin-top: -26%; margin-left: 19%;'>Packaged</span>
+								<div style="width: 13%; position: relative; margin-top: -10%; margin-left: 25%;">
+								<span class="btn btn-warning disabled" style=''>Packaged</span>
+								</div>
+								<!-- position: relative; margin-top: -30%; margin-left: 24%; -->
 							<% else %>
 							<% end %>
 							</div>
@@ -53,6 +65,7 @@
 			      <% end %>
 			    </tbody>
 			</table>
+			<% end %>
 	    </p>
 	    <%= link_to 'All Items', items_path, class: "btn btn-outline-primary", style: "margin-bottom: 1%;" %>
 	  </div>
