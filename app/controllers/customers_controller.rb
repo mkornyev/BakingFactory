@@ -20,6 +20,8 @@ class CustomersController < ApplicationController
   def show
     @previous_orders = @customer.orders.chronological
     @addresses = @customer.addresses
+    customer_orders = @previous_orders.map{|o| o.id}
+    @previous_items = OrderItem.where(order_id: customer_orders).take(5)
   end
 
   def new

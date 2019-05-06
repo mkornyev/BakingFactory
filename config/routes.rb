@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
   # Admin Dash
   get "/sales_dash", to: "home#sales_dash", as: "sales_dash"
+  post "/sales_dash", to: "home#sales_dash", as: "post_sales_dash"
   get "/customer_dash", to: "home#customer_dash", as: "customer_dash"
   get "/item_dash", to: "home#item_dash", as: "item_dash"
 

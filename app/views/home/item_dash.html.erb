@@ -10,24 +10,23 @@
 			    <%= link_to 'Sales Insights', sales_dash_path, class: "nav-link" %>
 			  </li>
 			  <li class="nav-item">
-			    <%= link_to 'Customer Insights', customer_dash_path, class: "nav-link active" %>
+			    <%= link_to 'Customer Insights', customer_dash_path, class: "nav-link" %>
 			  </li>
 			  <li class="nav-item">
-			    <%= link_to 'Item Insights', item_dash_path, class: "nav-link" %>
+			    <%= link_to 'Item Insights', item_dash_path, class: "nav-link active" %>
 			  </li>
 			</ul>
 
 			<div style="border: 1px solid #e5e4e2; border-top: none; display: inline;">
 				<p style="width: 40%; margin: 5%; margin-top: 0px;">
-				Total Customers in System: <strong><%= @customer_count %></strong><br>
-				Total Active Customers: <strong><%= @active_customer_count %></strong><br>
-				Avg # of Addresses per Customer: <strong><%= @avg_address_count %></strong><br><br>
-				<span style="color: #a3a3a3;">To view each customer's order share, refer to the chart below.</span>
+				Total Items in System: <strong><%= @item_count %></strong><br>
+				Total Active Items: <strong><%= @active_item_count %></strong><br><br>
+				<span style="color: #a3a3a3;">View the most popular items below.</span>
 				</p>
 
 				<hr>
-				<h5 style="margin-left: 45%; text-decoration: underline;">BF's Most Valued Customers:</h5>
-				<%= content_tag :div, "", id: "morris_chart", data: {customers: @customers } %>
+				<h5 style="margin-left: 45%; text-decoration: underline;">BF's Most Ordered Items:</h5>
+				<%= content_tag :div, "", id: "morris_chart", data: {items: @items } %>
 
 			</div>
 
@@ -43,12 +42,9 @@
 	<script type="text/javascript">
 		new Morris.Bar({
 		  element: 'morris_chart',
-		  data: $('#morris_chart').data('customers'),
+		  data: $('#morris_chart').data('items'),
 		  xkey: 'label',
-		  // A list of names of data record attributes that contain y-values.
 		  ykeys: ['value'],
-		  // Labels for the ykeys -- will be displayed when you hover over the
-		  // chart.
 		  labels: ['Total Orders']
 		});
 	</script>

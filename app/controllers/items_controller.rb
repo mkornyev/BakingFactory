@@ -31,6 +31,14 @@ class ItemsController < ApplicationController
   end
 
   def show
+    # byebug
+    if params[:new_price].present?
+      item_price = ItemPrice.new
+      item_price.item_id = @item.id 
+      item_price.price = params[:new_price]
+      item_price.save!
+    end
+
     if logged_in? && current_user.role?(:admin)
       # admin gets a price history in the sidebar
       @previous_prices = @item.item_prices.chronological.to_a

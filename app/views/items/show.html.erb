@@ -28,9 +28,17 @@
 		    	<% else %>
 			    	<%= button_to 'Make Active', {:controller => "items", :action => "toggle", :item_id => @item.id}, :method=>:post, params: {item_id: @item.id}, class: 'btn btn-primary', style: 'margin-left: 12%; margin-top: -9.2%;' %>
 		    	<% end %>
+		    	<%= form_for "", :class => "form-inline", url: item_path(@item), role: 'new_price', method: :get do %>
+					<span>
+					<%= text_field_tag :new_price, params[:new_price], placeholder: "Enter a new price", class: "form-control", style: 'width: 20%; margin-top: -2%;' %>
+					</span>
+					<span>
+					<%= submit_tag "Update Price",:class => "btn btn-outline-warning", name: nil, style: 'margin-left: 21%; margin-top: -7.2%;' %>
+					</span>
+				<% end %>
 	    	<% end %>
 	    	<% if logged_in? && (current_user.role?(:admin) || current_user.role?(:customer)) %>
-		    	<%= button_to 'Add to Cart', {:controller => "cart_items", :action => "add_item", :item_id => @item.id}, :method=>:post, params: {item_id: @item.id}, class: "btn btn-primary", style: "margin-top: -2%;"  %>
+		    	<%= button_to 'Add to Cart', {:controller => "cart_items", :action => "add_item", :item_id => @item.id}, :method=>:post, params: {item_id: @item.id}, class: "btn btn-primary", style: "margin-top: 2%;"  %>
 		    <% else %> 
 		    <% end %> 
 	  	</div>

@@ -16,6 +16,8 @@ class CartItemsController < ApplicationController
 		path_var = request.referrer.split("/").last
 		if path_var == "items" || path_var.include?("page")
 			redirect_to items_path
+		elsif request.referrer.include?("customers") 
+			redirect_to customer_path(Customer.where(id: path_var).take)
 		else 
 			redirect_to item_path(Item.where(id: path_var).take)
 		end

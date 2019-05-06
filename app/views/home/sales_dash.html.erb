@@ -23,13 +23,16 @@
 				Total Items Sold: <strong><%= @goods_count %></strong><br><br>
 				<span style="color: #a3a3a3;">To view all daily sales data, refer to the chart below.</span>
 				</p>
-				<div style="width: 40%; margin-left: 5%; display: none;">
-					Look back this many weeks (<%= @weeks%> weeks since first order) <%= number_field_tag(:weeks_count, @weeks, min: 1, max: @weeks, class: 'form-control') %>
-					<%= button_to 'Go', {:controller => "home", :action => "sales_dash", :weeks => :weeks_count}, :method=>:post, params: {weeks: :weeks_count}, class: 'btn btn-primary', style: 'margin-left: 10%;' %>
+				<div style="width: 100%; margin-left: 5%;">
+					<%= button_to '1 month', {:controller => "home", :action => "sales_dash", :weeks => 4}, :method=>:post, params: {weeks: 4}, class: 'btn btn-primary', style: 'margin-left: 0%; margin-top: -5%;' %>
+					<%= button_to '3 months', {:controller => "home", :action => "sales_dash", :weeks => 13}, :method=>:post, params: {weeks: 13}, class: 'btn btn-primary', style: 'margin-left: 6.5%; margin-top: -8.4%;' %>
+					<%= button_to '6 months', {:controller => "home", :action => "sales_dash", :weeks => 26}, :method=>:post, params: {weeks: 26}, class: 'btn btn-primary', style: 'margin-left: 13.8%; margin-top: -11.6%;' %>
+					<%= button_to '1 Year', {:controller => "home", :action => "sales_dash", :weeks => 52}, :method=>:post, params: {weeks: 52}, class: 'btn btn-primary', style: 'margin-left: 21%; margin-top: -14.9%;' %>
 				</div>
 
 				<hr>
 				<h5 style="margin-left: 45%; text-decoration: underline;">Daily Sales Volume:</h5>
+
 				<%= content_tag :div, "", id: "morris_chart", data: {sales: @orders } %>
 
 			</div>

@@ -3,9 +3,10 @@
    
     <div class="card mb-3">
 	  <div class="row no-gutters">
-		<div class="col-md-8">
+		<div class="col-md-6">
 	  	<div class="card-body">
 	    	<h5 class="card-title">Customer Details</h5>
+	    	<p style="color: #a3a3a3;">View your addresses, orders, and recently ordered items below.</p>
 	        <strong>Name:</strong>
 	        <p><%= @customer.name %></p>
 	    	<strong>Email:</strong>
@@ -26,14 +27,43 @@
 	        <%= link_to 'Edit Customer', edit_customer_path(@customer), class: "btn btn-outline-primary" %> 
 	  	</div>
 	  	</div>
+
 	  </div>
 	</div>
 
   </div>
 </div>
 
+<div class="row" style="margin-top: -5%; margin-left: 3%;">
+  	<% @previous_items.each do |oi| %>
+  	<div class="col" style="">
+        <div class="card" style="width: 78%;">
+          <% if oi.item.category == 'bread' %>
+          <%= image_tag("bread.jpg", class: 'card-img-top')%>
+          <% elsif oi.item.category == 'muffins' %>
+          <%= image_tag("muffins.jpg", class: 'card-img-top img-fluid' )%>
+          <% else %>
+          <%= image_tag("pastries.jpg", class: 'card-img-top img-fluid')%>
+          <% end %>
+          <div class="card-body">
+            <strong class="card-title"><%= oi.item.name %></strong>
+            <p class="card-text">
+            	<%= number_to_currency oi.item.current_price %> | <%= oi.item.units_per_item %> <%= oi.item.category == 'bread' ? 'loaf' : oi.item.category %><br>
+            </p>
+          	<% if logged_in? && (current_user.role?(:admin) || current_user.role?(:customer)) %>
+            <%= button_to 'Add to Cart', {:controller => "cart_items", :action => "add_item", :item_id => oi.item.id}, :method=>:post, params: {item_id: oi.item.id}, class: "btn btn-primary", style: "margin-top: 5px;"  %>
+          	<% else %>
+          	<% end %> 
+          </div>
+        </div>
+    </div>
+    <% end %> 
+  </div>
+</div>
+
+
 <div class="row">
-  <div class="col" style="margin: 5%; margin-top: -5%;">
+  <div class="col" style="margin: 5%; margin-top: 1%;">
    
     <div class="card mb-3">
 	  <div class="row no-gutters">
@@ -121,9 +151,9 @@
 			          <td>
 			          	<% order.order_items.order(:id).each do |item| %> 
 			          	  <% if item == order.order_items.order(:id).last %>
-			          	  	<span><%= item.item.name %>. </span>
+			          	  	<span><%= link_to item.item.name, item_path(item.item) %>. </span>
 			          	  <% else %>
-			          		<span><%= item.item.name %>, </span>
+			          		<span><%= link_to item.item.name, item_path(item.item) %>, </span>
 			          	  <% end %>
 			          	<% end %> 
 			          </td>
@@ -139,3 +169,98 @@
 	</div>
 </div>
 </div>
+
+<!-- Carousel Styles & Scripts -->
+<!-- Credit to: https://codepen.io/kreigd/pen/ybYNoN -->
+
+<style type="text/css">
+  @media (min-width: 768px) {
+  /* show 3 items */
+  .carousel-inner .active,
+  .carousel-inner .active + .carousel-item,
+  .carousel-inner .active + .carousel-item + .carousel-item {
+    display: block;
+  }
+
+  .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+  .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
+  .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
+    transition: none;
+  }
+
+  .carousel-inner .carousel-item-next,
+  .carousel-inner .carousel-item-prev {
+    position: relative;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item {
+    position: absolute;
+    top: 0;
+    right: -33.3333%;
+    z-index: -1;
+    display: block;
+    visibility: visible;
+  }
+
+  /* left or forward direction */
+  .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+  .carousel-item-next.carousel-item-left + .carousel-item,
+  .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
+  .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
+    position: relative;
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+
+  /* farthest right hidden item must be abso position for animations */
+  .carousel-inner .carousel-item-prev.carousel-item-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: block;
+    visibility: visible;
+  }
+
+  /* right or prev direction */
+  .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+  .carousel-item-prev.carousel-item-right + .carousel-item,
+  .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
+  .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
+    position: relative;
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+    display: block;
+    visibility: visible;
+  }
+}
+</style>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+	  $("#myCarousel").on("slide.bs.carousel", function(e) {
+	    var $e = $(e.relatedTarget);
+	    var idx = $e.index();
+	    var itemsPerSlide = 3;
+	    var totalItems = $(".carousel-item").length;
+
+	    if (idx >= totalItems - (itemsPerSlide - 1)) {
+	      var it = itemsPerSlide - (totalItems - idx);
+	      for (var i = 0; i < it; i++) {
+	        // append slides to end
+	        if (e.direction == "left") {
+	          $(".carousel-item")
+	            .eq(i)
+	            .appendTo(".carousel-inner");
+	        } else {
+	          $(".carousel-item")
+	            .eq(0)
+	            .appendTo($(this).find(".carousel-inner"));
+	        }
+	      }
+	    }
+	  });
+	});
+</script>
+

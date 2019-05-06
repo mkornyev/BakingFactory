@@ -71,6 +71,21 @@ class HomeController < ApplicationController
   end
 
   def item_dash
+  	# Total Items
+  	@item_count = Item.all.count 
+  	@active_item_count = Item.all.active.count 
+  	@items = item_chart_data
+  	@items = @items.sort_by{ |arr| arr[:value] }
+  end
+
+  def item_chart_data
+  	# Customer order counts
+  	(Item.all).map do |i|
+  		{
+  		label: i.name,
+  		value: OrderItem.where(item_id: i.id).map{|oi| oi.quantity}.sum
+  		}
+  	end
   end
 
 end
