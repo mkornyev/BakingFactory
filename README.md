@@ -17,7 +17,7 @@ All the users in the system use the password 'secret'.
 
 # Feature List 
 
--Cart, Checkout, and Order creation
+-Cart, checkout, and order creation
 
 -Payment Gateway Simulation 
 
@@ -26,6 +26,8 @@ All the users in the system use the password 'secret'.
 -Informative Admin Dashboards 
 
 -Baking & Shipping Lists that simulate in-house inventory and fulfilment services 
+
+-Models that accurately calculate shipping costs based on item weights 
 
 
 # mk
