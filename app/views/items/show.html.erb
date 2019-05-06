@@ -5,14 +5,14 @@
 	  <div class="row no-gutters">
 	    <div class="col-md-4" style="margin-right: -200px;">
 	      <% if !@item.picture.nil? %>
-	      	<%= image_tag @item.picture, class: 'card-img-top', style: "height: 100%; width: 50%;"%>
+	      	<%= image_tag @item.picture, class: 'card-img-top', style: "height: 100%; width: 55%;"%>
 	      <% else %>
 			  <% if @item.category == 'bread' %>
-		        <%= image_tag("bread.jpg", class: 'card-img-top', style: "height: 100%; width: 50%;")%>
+		        <%= image_tag("bread.jpg", class: 'card-img-top', style: "height: 100%; width: 55%;")%>
 		      <% elsif @item.category == 'muffins' %>
-		        <%= image_tag("muffins.jpg", class: 'card-img-top', style: "height: 100%; width: 50%;" )%>
+		        <%= image_tag("muffins.jpg", class: 'card-img-top', style: "height: 100%; width: 55%;" )%>
 		      <% elsif @item.category == 'pastries' %>
-		        <%= image_tag("pastries.jpg", class: 'card-img-top', style: "height: 100%; width: 50%;")%>
+		        <%= image_tag("pastries.jpg", class: 'card-img-top', style: "height: 100%; width: 55%;")%>
 		      <% end %>
 		  <% end %>
 	    </div>

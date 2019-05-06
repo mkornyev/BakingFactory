@@ -48,7 +48,9 @@
           </td>
           
           <td>
+            <% if item.active %> 
             <%= button_to '+', {:controller => "cart_items", :action => "add_item", :item_id => item.id}, :method=>:post, params: {item_id: item.id}, class: 'btn btn-primary', style: 'margin-left: 20%;' %>
+            <% end %>
           </td>
         </tr>
       <% end %>
