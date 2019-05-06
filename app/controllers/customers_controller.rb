@@ -1,8 +1,8 @@
 class CustomersController < ApplicationController
   include ActionView::Helpers::NumberHelper
   before_action :set_customer, only: [:show, :edit, :update, :toggle_activity]
-  before_action :check_login, except: [:new]
-  authorize_resource
+  before_action :check_login, except: [:new, :create]
+  authorize_resource except: [:new, :create] 
   
   def index
     if params[:search].present? && !(["inactive","active"].include?(params[:search]))
@@ -47,7 +47,7 @@ class CustomersController < ApplicationController
       @customer.user_id = @user.id
       if @customer.save 
         flash[:notice] = "Created a new customer: #{@customer.proper_name}."
-        redirect_to customer_path(@customer)
+        redirect_to login_path
       else
         flash[:notice] = "Customer could not be saved."
         render "customers/new"
@@ -69,7 +69,7 @@ class CustomersController < ApplicationController
 
   private
   def convert_user_role
-    unless current_user.role?(:admin)
+    unless current_user.nil? || current_user.role?(:admin)
       # if you aren't admin, we are overriding the role param to be customer
       params[:customer][:user_attributes][:role] = "customer"
     end
