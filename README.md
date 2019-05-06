@@ -32,5 +32,9 @@ All the users in the system use the password 'secret'.
 
 -Models that accurately calculate shipping costs based on item weights 
 
+# Acknowledgements
+
+-Larry Heimann, 'profh' on github, is responsible for writing the Model, populate script, helper, and test code for this project.
+
 
 # mk
