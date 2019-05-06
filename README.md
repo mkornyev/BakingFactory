@@ -15,4 +15,13 @@ User: 'user12' (users 1-120 exist in the system)
 
 All the users in the system use the password 'secret'.
 
+# Feature List 
+
+-Cart, Checkout, and Order creation 
+-Payment Gateway Simulation 
+-Authentication & Authorization for 4 different types of users 
+-Informative Admin Dashboards 
+-Baking & Shipping Lists that simulate in-house inventory and fulfilment services 
+
+
 # mk
