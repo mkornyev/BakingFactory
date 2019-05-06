@@ -17,7 +17,7 @@ All the users in the system use the password 'secret'.
 
 # Feature List 
 
--Cart, Checkout, and Order creation 
+-Cart, Checkout, and Order creation\n
 -Payment Gateway Simulation 
 -Authentication & Authorization for 4 different types of users 
 -Informative Admin Dashboards 
