@@ -9,8 +9,11 @@ Welcome to the Baking Factory, a bread marketplace similar to the likes of Amazo
 
 # Logins 
 Admin: 'mark'
+
 Baker: 'baker'
+
 Shipper: 'shipper'
+
 User: 'user12' (users 1-120 exist in the system)
 
 All the users in the system use the password 'secret'.
