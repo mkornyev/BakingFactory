@@ -1,0 +1,557 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+
+ */
+/* @import "materialize"; */
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+/* line 1, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+html {
+  height: 100%;
+  box-sizing: border-box;
+  margin-bottom: 400px;
+}
+
+/* line 12, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+body {
+  font-family: "Verdana", Geneva, sans-serif;
+  font-size: 100%;
+  line-height: 1.7em;
+  color: #000000;
+  margin-top: 80px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    font-weight: 0%;
+  }
+  to {
+    opacity: 1;
+    font-weight: 100%;
+  }
+}
+/* line 31, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+main {
+  /* flex: 1 0 auto; */
+}
+
+/* line 35, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.tiny {
+  font-size: x-small;
+}
+
+/* line 39, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.home_link {
+  color: #ffd600;
+}
+
+/* Parallax main section */
+/* line 44, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+#parallax {
+  background: url(bg.jpg);
+  background-attachment: fixed;
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: 955px 467px;
+  height: 500px;
+  color: black;
+}
+
+/* line 54, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+#parallax p {
+  margin-left: 3%;
+  width: 40%;
+}
+
+/* line 59, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+#parallax h2 {
+  height: 35%;
+  font-size: 4em;
+}
+
+/* line 64, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.post-parallax {
+  display: inline;
+  border-top: solid black;
+  padding-bottom: 3em;
+  border-bottom: solid black;
+  border-width: 1px;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+/* line 74, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.post-parallax h3 {
+  margin-top: 10%;
+}
+
+/* line 78, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.post-parallax h4 {
+  color: #666666;
+}
+
+/********** NAV START ********/
+/* Nav Bar*/
+/* line 85, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.navbar {
+  position: fixed;
+  z-index: 5;
+  /*Send element to top*/
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #14213D;
+  font-size: .85em;
+  height: 80px;
+  width: 101%;
+  padding: 0;
+}
+
+/* line 98, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.navbar a,
+div.navbar div {
+  display: inline;
+  font-size: 1.25em;
+  text-decoration: none;
+  color: #FFC107;
+}
+
+/* line 106, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.navbar div {
+  float: right;
+  border-left: solid 2px;
+  padding-right: 2%;
+  margin-right: 0;
+  border-color: white;
+  height: 100%;
+  width: 120px;
+}
+
+/* line 116, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.navbar li {
+  font-size: !important 1em;
+  text-align: center;
+  padding-top: 25%;
+  list-style: none;
+}
+
+/* line 123, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.navbar img {
+  height: 100%;
+  padding-left: 2%;
+}
+
+/* Nav Link Underline Effect */
+/* line 131, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+span.selected_effect {
+  font-weight: bold;
+}
+
+/* line 135, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.navbar a.underline_effect,
+div.navbar a.underline_effect:after,
+div.navbar a.underline_effect:before,
+div.navbar li.underline_effect,
+div.navbar li.underline_effect:after,
+div.navbar li.underline_effect:before {
+  transition: all .5s;
+}
+
+/* line 144, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.navbar a.underline_effect,
+div.navbar li.underline_effect {
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 21px;
+  position: relative;
+}
+
+/* line 152, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.navbar a.underline_effect:after,
+div.navbar li.underline_effect:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: #FFC107;
+  height: 1px;
+}
+
+/* line 166, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.navbar a.underline_effect:hover:after,
+div.navbar li.underline_effect:hover:after {
+  width: 75%;
+}
+
+/* Logo Effect */
+/* line 172, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.navbar img {
+  opacity: 1;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  filter: blur(0px);
+}
+
+/* line 178, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.navbar:hover img {
+  opacity: .5;
+  filter: blur(1px);
+}
+
+/********** NAV END ********/
+/********** FLASH MSGS ********/
+/* line 186, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+#flash_notice, #flash_error, #flash_alert {
+  padding: 5px 8px;
+  margin: 10px;
+}
+
+/* line 191, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+  color: #008000;
+}
+
+/* line 197, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+#flash_error, #flash_alert {
+  background-color: #FCC;
+  border: solid 1px #C66;
+  color: #800000;
+}
+
+/********** FOOTER ********/
+/* Footer */
+/* line 207, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.footer {
+  position: fixed;
+  right: 0;
+  bottom: 0px;
+  left: 0;
+  z-index: 5;
+  /*Send element to top*/
+  padding: 0;
+  text-align: center;
+  background-color: #14213D;
+  height: 60px;
+  padding-top: 20px;
+  padding-left: 4em;
+  color: #FFC107;
+}
+
+/* line 223, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.social {
+  display: inline;
+  padding-right: 4em;
+  float: right;
+}
+
+/* line 229, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.footer a {
+  text-decoration: none;
+  color: #d3d3d3;
+}
+
+/* line 234, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+div.footer a:hover {
+  color: #FFFFFF;
+}
+
+/********** TABLES ********/
+/* line 239, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+table.striped > tbody > tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+/* line 243, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+table.striped > tbody > tr:nth-child(even) {
+  background-color: #fffde7;
+}
+
+/* line 247, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+table.highlight > tbody > tr:hover {
+  background-color: #fff59d;
+}
+
+/* line 251, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+table.lined > tbody > tr {
+  border-bottom: 1px solid #f5f5f5;
+}
+
+/* line 255, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+td.align_right {
+  text-align: right;
+}
+
+/* line 259, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+td.align_center {
+  text-align: center;
+}
+
+/* line 263, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+th.align_right {
+  text-align: right;
+}
+
+/* line 267, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+th.align_center {
+  text-align: center;
+}
+
+/********** BUTTONS ********/
+/* line 272, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.btn {
+  background-color: #ffd600;
+  color: #000;
+}
+
+/* line 277, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.btn:hover {
+  background-color: #ffff00;
+  color: #000;
+}
+
+/* line 282, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.btn-secondary {
+  background-color: #eceff1;
+  color: #000;
+}
+
+/* line 287, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.btn-secondary:hover {
+  background-color: #cfd8dc;
+  color: #000;
+}
+
+/* line 292, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.btn-alert {
+  background-color: #c62828;
+  color: #fff;
+}
+
+/* line 296, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.btn-alert:hover {
+  background-color: #e53935;
+  color: #fff;
+}
+
+/********** FORMS ********/
+/* line 302, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.switch label input[type=checkbox]:checked + .lever {
+  background-color: #8B5C10;
+}
+
+/* line 306, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.switch label input[type=checkbox]:checked + .lever::after {
+  background-color: #55aed4;
+}
+
+/* line 310, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.picker__date-display {
+  background-color: #8B5C10;
+  color: #ffd600;
+}
+
+/* line 315, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.picker__year-display {
+  color: #ffd600;
+}
+
+/* line 319, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+input[type=text].search {
+  border-bottom: none;
+  margin-left: 10px;
+}
+
+/* line 324, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
+  border-radius: 50%;
+  transform: scale(0.9);
+  background-color: #ffd600;
+  color: #000;
+}
+
+/* line 331, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.check_boxes.optional.filled-in {
+  background-color: #ffd600;
+}
+
+/* line 335, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+[type="checkbox"].filled-in:checked + label:after {
+  border: 2px solid #ffd600;
+  background-color: #ffd600;
+}
+
+/* line 340, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+[type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:after {
+  border: 2px solid #ffd600;
+  background-color: #ffd600;
+}
+
+/* line 345, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+#form-template {
+  padding-left: 20px;
+}
+
+/********** MEDIA ********/
+/* line 351, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.img_left {
+  float: left;
+  padding-right: 10px;
+}
+
+/* line 356, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.img_right {
+  float: right;
+  padding-left: 10px;
+}
+
+/* line 361, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.carousel {
+  height: 250px;
+}
+
+/********** CARDS ********/
+/* line 366, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+  color: #ffab00;
+}
+
+/* line 370, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.remove {
+  color: #b71c1c;
+}
+
+/* line 374, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+li.no_bullet {
+  list-style-type: none;
+}
+
+/********** TABS ********/
+/* line 379, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.tabs .tab a.active {
+  color: #8B5C10;
+}
+
+/* line 383, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.tabs .tab a:hover {
+  color: #a7782b;
+}
+
+/* line 387, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.tabs .tab a {
+  color: #bdbdbd;
+}
+
+/* line 391, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.tabs .indicator {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: #8B5C10;
+  will-change: left, right;
+}
+
+/********** FLASH MSGs ********/
+/* line 400, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.alert-box {
+  border-style: solid;
+  border-width: 1px;
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: normal;
+  margin-bottom: 1.25rem;
+  padding: 0.875rem 1.5rem 0.875rem 0.875rem;
+  position: relative;
+  transition: opacity 300ms ease-out;
+  background-color: #008CBA;
+  border-color: #0078a0;
+  color: #FFFFFF;
+}
+
+/* line 413, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.alert-box .close {
+  right: 0.25rem;
+  background: inherit;
+  color: #333333;
+  font-size: 1.375rem;
+  line-height: .9;
+  margin-top: -0.6875rem;
+  opacity: 0.3;
+  padding: 0 6px 4px;
+  position: absolute;
+  top: 50%;
+}
+
+/* line 424, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.alert-box .close:hover, .alert-box .close:focus {
+  opacity: 0.5;
+}
+
+/* line 426, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.alert-box.radius {
+  border-radius: 3px;
+}
+
+/* line 428, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.alert-box.round {
+  border-radius: 1000px;
+}
+
+/* line 430, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.alert-box.success {
+  background-color: #e8f5e9;
+  border-color: #a5d6a7;
+  color: #1b5e20;
+}
+
+/* line 434, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.alert-box.alert {
+  background-color: #f04124;
+  border-color: #de2d0f;
+  color: #FFFFFF;
+}
+
+/* line 438, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.alert-box.secondary {
+  background-color: #e7e7e7;
+  border-color: #c7c7c7;
+  color: #4f4f4f;
+}
+
+/* line 442, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.alert-box.warning {
+  background-color: #fff3e0;
+  border-color: #ffcc80;
+  color: #ef6c00;
+}
+
+/* line 446, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.alert-box.info {
+  background-color: #a0d3e8;
+  border-color: #74bfdd;
+  color: #4f4f4f;
+}
+
+/* line 450, /Users/max/Documents/School/67272/P5/BakingFactory_V5/app/assets/stylesheets/overrides.scss */
+.alert-box.alert-close {
+  opacity: 0;
+}
+.morris-hover{position:absolute;z-index:1000}.morris-hover.morris-default-style{border-radius:10px;padding:6px;color:#666;background:rgba(255,255,255,0.8);border:solid 2px rgba(230,230,230,0.8);font-family:sans-serif;font-size:12px;text-align:center}.morris-hover.morris-default-style .morris-hover-row-label{font-weight:bold;margin:0.25em 0}
+.morris-hover.morris-default-style .morris-hover-point{white-space:nowrap;margin:0.1em 0}
