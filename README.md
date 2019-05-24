@@ -1,4 +1,4 @@
-<img src="bflogo_markup.png" width="80px" alt="BF">
+<img src="bf_logo_markup.png" width="80px" alt="BF">
 ---
 Welcome to the Baking Factory, a bread marketplace similar to the likes of Amazon.
 
