@@ -1,5 +1,4 @@
-# Baking Factory
-<img src="bf_markup.png" width="60px" style="width: 60px; padding-top: 40px;" alt="BF">
+# Baking Factory<img src="bf_markup.png" class="pt-5" width="60px" style="width: 60px; padding-top: 40px;" alt="BF">
 ---
 Welcome to the Baking Factory, a bread marketplace similar to the likes of Amazon.
 
@@ -37,5 +36,5 @@ User: 'user12' (users 1-120 exist in the system)
 
 -Larry Heimann, 'profh' on github, is responsible for writing the Model, populate script, helper, and test code for this project.
 
-
+<br>
 <img src="mk_markup.png" width="45px" alt="MK">
