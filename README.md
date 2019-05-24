@@ -1,4 +1,4 @@
-# Baking Factory<img src="bf_markup.png" class="pt-5" width="60px" style="width: 60px; padding-top: 40px;" alt="BF">
+# Baking Factory<img src="bf_markup.png" width="60px" alt="BF">
 ---
 Welcome to the Baking Factory, a bread marketplace similar to the likes of Amazon.
 
