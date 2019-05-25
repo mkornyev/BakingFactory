@@ -1,7 +1,7 @@
 <img src="bf_logo_markup.png" width="200px" alt="BF"><br>
 ###### Welcome to the Baking Factory, a bread marketplace similar to the likes of Amazon.
 
-## Setup
+# Setup
 1. Run `bundle install`
 2. Migrate with `rake db:migrate`
 3. Populate the data with `rake db:populate` 
@@ -31,7 +31,7 @@ User: 'user12' (users 1-120 exist in the system)
 
 -Models that accurately calculate shipping costs based on item weights 
 
-# Acknowledgements
+## Acknowledgements
 
 Larry Heimann, 'profh' on github, is responsible for writing the Model, populate script, helper, and test code for this project.
 
