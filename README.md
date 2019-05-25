@@ -34,7 +34,7 @@ User: 'user12' (users 1-120 exist in the system)
 
 ## Acknowledgements
 
-Larry Heimann, 'profh' on github, is responsible for writing the Model, populate script, helper, and test code for this project.
+Larry Heimann, 'profh' on github, is responsible for writing the Model and test code for this project.
 
 <br>
 <img src="mk_markup.png" width="45px" alt="MK">
