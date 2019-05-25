@@ -1,7 +1,7 @@
 <img src="bf_logo_markup.png" width="200px" alt="BF"><br>
 ###### Welcome to the Baking Factory, a bread marketplace similar to the likes of Amazon.
 
-# Setup (Ruby on Rails)
+## Setup (Ruby on Rails)
 1. Run `bundle install` in the project directory
 2. Migrate with `rake db:migrate`
 3. Populate the data with `rake db:populate` 
