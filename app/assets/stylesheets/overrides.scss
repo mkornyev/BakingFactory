@@ -17,6 +17,16 @@ body {
   margin-top: 80px;
 }
 
+div.sales-toggle {
+  width: 100%; 
+  margin-left: 5%;
+}
+
+div.sales-toggle input.btn {
+  float: left; 
+  margin: 1%;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

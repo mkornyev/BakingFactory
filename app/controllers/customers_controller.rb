@@ -47,7 +47,12 @@ class CustomersController < ApplicationController
       @customer.user_id = @user.id
       if @customer.save 
         flash[:notice] = "Created a new customer: #{@customer.proper_name}."
-        redirect_to login_path
+        if logged_in? && ( current_user.role?(:admin) )
+          redirect_to customer_path(@customer)
+        else 
+          redirect_to login_path
+        end
+        # The usual: redirect_to login_path
       else
         flash[:notice] = "Customer could not be saved."
         render "customers/new"

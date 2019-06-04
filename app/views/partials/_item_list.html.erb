@@ -1,9 +1,9 @@
 <% if @all_items.nil? || @all_items.empty? %>
     <div class='col-9'>
       Nothing currently available. Try, try again!
-      </div>
+    </div>
 <% else %>
-      <div class='row' style="color: #FFC107; padding-left: 0; margin-left: 38.1%; padding-top: 2%;">
+      <div class='row' style="padding-top: 1%; margin: auto;">
       <%= will_paginate @all_items, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
       </div>
       
@@ -42,7 +42,7 @@
       <% end %>
       </div>
 
-      <div class='row' style="color: #FFC107; padding-left: 0; margin-left: 38.1%;">
+      <div class='row' style="margin: auto;">
       <%= will_paginate @all_items, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
       </div>
       

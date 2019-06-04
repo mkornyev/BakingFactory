@@ -22,16 +22,10 @@ class ItemsController < ApplicationController
       @all_items = Item.inactive.alphabetical.paginate(:page => params[:page]).per_page(6)
     else 
       @all_items = Item.active.alphabetical.paginate(:page => params[:page]).per_page(6)
-      # @breads = Item.active.for_category('bread').alphabetical.search_by(params[:search]).paginate(:page => params[:page]).per_page(6)
-      # @muffins = Item.active.for_category('muffins').alphabetical.search_by(params[:search]).paginate(:page => params[:page]).per_page(6)
-      # @pastries = Item.active.for_category('pastries').alphabetical.search_by(params[:search]).paginate(:page => params[:page]).per_page(6)
-      # # get a list of any inactive items for sidebar
-      # @inactive_items = Item.inactive.alphabetical.search_by(params[:search]).paginate(:page => params[:page]).per_page(6)
     end
   end
 
   def show
-    # byebug
     if params[:new_price].present?
       item_price = ItemPrice.new
       item_price.item_id = @item.id 
@@ -72,6 +66,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    # Avoid a FK constraint error here (due to ItemPrice and OrderItem dependencies)
     @item.destroy
     redirect_to items_url, notice: "#{@item.name} was removed from the system."
   end

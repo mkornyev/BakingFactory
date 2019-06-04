@@ -1,4 +1,7 @@
 class Item < ApplicationRecord
+  # REQUIRED EDIT: 
+  # Make item price a required field
+
   # get modules to help with some functionality
   include AppHelpers::Validations
   include AppHelpers::Deletions

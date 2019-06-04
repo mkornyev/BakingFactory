@@ -3,18 +3,19 @@
    
    	<h5 style="">Incoming Orders:</h5>
    	<p style="color: #a3a3a3; padding-bottom: 3%; border-bottom: 1px solid #a3a3a3;">
-   		Use the packaging toggles to stage each item for shipping, and confirm with the ship button on your right.<br><br>
+   		Use the <span style="color: blue;">blue</span> toggles to stage each item for shipping, and confirm with the <span style="color: #FFC107;">yellow</span> ship button below.<br>
    		Click the address to view additional customer contact information.
-   		<div style="position: relative; margin-left: 62%; margin-top: -6%;">
-   			<% if session[:shipped].empty? %>
-   			<%= button_to 'Ship Packaged Items', {:controller => "orders", :action => "ship_items", :submit => "true"}, :method=>:post, params: {submit: "true"}, class: 'btn-lg btn-warning', style: 'color: #a9a9a9;', disabled: true %>
-   			<% else %>
-   			<%= button_to 'Ship Packaged Items', {:controller => "orders", :action => "ship_items", :submit => "true"}, :method=>:post, params: {submit: "true"}, class: 'btn-lg btn-warning', style: '' %>
-   			<% end %>
-   		</div>
    	</p>
 
-	<div class="card mb-3" style="margin-top: 3%;">
+   	<div style="margin: auto;">
+		<% if session[:shipped].empty? %>
+		<%= button_to 'Ship Packaged Items', {:controller => "orders", :action => "ship_items", :submit => "true"}, :method=>:post, params: {submit: "true"}, class: 'btn-lg btn-warning', style: 'color: #a9a9a9;', disabled: true %>
+		<% else %>
+		<%= button_to 'Ship Packaged Items', {:controller => "orders", :action => "ship_items", :submit => "true"}, :method=>:post, params: {submit: "true"}, class: 'btn-lg btn-warning', style: '' %>
+		<% end %>
+	</div>
+
+	<div class="card mb-3" style="margin-top: 1%;">
 	  <div class="card-body">
 
 	    <p class="card-text">
@@ -38,27 +39,22 @@
 			          	<ul>
 			          	<% @order_items.each do |oi| %>
 			          		<% if oi.order_id == o.id %>
-			          			<li><%= oi.item.name %> <strong>(<%= oi.quantity %>)</strong></li>
-							<div style="display: inline;">
-							<div style="width: 13%; position: relative; margin-top: 3%; margin-left: 0%;">
-							<%= button_to '+', {:controller => "orders", :action => "add_shipping", :order_item_id => oi.id}, :method=>:post, params: {order_item_id: oi.id}, class: 'btn btn-primary', style: 'border-radius: 50px; height: 35px; width: 35px;' %>
-							</div>
-							<!-- position: relative; margin-left: 0%; margin-top: 5%; -->
-							<div style="width: 13%; position: relative; margin-top: -11.7%; margin-left: 13%;">
-							<%= button_to '-', {:controller => "orders", :action => "remove_shipping", :order_item_id => oi.id}, :method=>:post, params: {order_item_id: oi.id}, class: 'btn btn-primary', style: 'border-radius: 50px; height: 35px; width: 35px;' %>
-							</div>
-							<!-- position: relative; margin-top: -17.5%; margin-left: 12%; -->
-							<% if session[:shipped].include?(oi.id.to_s) %>
-								<div style="width: 13%; position: relative; margin-top: -10%; margin-left: 25%;">
-								<span class="btn btn-warning disabled" style=''>Packaged</span>
-								</div>
-								<!-- position: relative; margin-top: -30%; margin-left: 24%; -->
-							<% else %>
-							<% end %>
-							</div>
+			          			<li style="">
+			          				<p>
+			          				<%= oi.item.name %> <strong>(<%= oi.quantity %>)</strong>
+			          				</p>
+			          				<%= button_to '+', {:controller => "orders", :action => "add_shipping", :order_item_id => oi.id}, :method=>:post, params: {order_item_id: oi.id}, class: 'btn btn-primary', style: 'border-radius: 50px; height: 35px; width: 35px; float: left;' %>
+			          				<%= button_to '-', {:controller => "orders", :action => "remove_shipping", :order_item_id => oi.id}, :method=>:post, params: {order_item_id: oi.id}, class: 'btn btn-primary', style: 'border-radius: 50px; height: 35px; width: 35px; float: left;' %>
+			          				<% if session[:shipped].include?(oi.id.to_s) %>
+										<span class="btn btn-warning disabled" style=''>Packaged</span>
+									<% else %>
+									<% end %>
+
+			          			</li>
 			          		<% else %>
 			          		<% end %>
 			          	<% end %>
+			          	<br>
 			          	</ul>
 				      </td>
 			        </tr>

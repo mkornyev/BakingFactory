@@ -18,7 +18,7 @@
 	        <p><%= @order.address.street_1 %> <%= @order.address.street_2.nil? ? "" : @order.address.street_2 %> <%= @order.address.city %>, <%= @order.address.state %> <%= @order.address.zip %></p>
 	        <strong>Order Items:</strong>
 	        <p>
-	        	<table class="table table-striped" style="width: 95%; border: 1px dotted #007bff;">
+	        	<table class="table" style="width: 100%; border: 1px;">
 			    <thead>
 			      <tr>
 			        <th width="50">Item</th>
@@ -45,7 +45,7 @@
 	  <div class="card-body">
 	    <h5 class="card-title">Previous Orders</h5>
 	    <p class="card-text">
-	    	<table class="table table-striped" style="width: 95%; border: 1px dotted #007bff;">
+	    	<table class="table table-striped" style="width: 100%; border: 1px;">
 			    <thead>
 			      <tr>
 			        <th width="50">Date</th>
