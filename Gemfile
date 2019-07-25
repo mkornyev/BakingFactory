@@ -10,9 +10,16 @@ end
 gem 'rails', '~> 5.1.6', '>= 5.1.6.1'
 
 # Use sqlite3 as the database for Active Record
-# gem 'sqlite3'
+# gem 'sqlite3', git: "https://github.com/larskanis/sqlite3-ruby", branch: "add-gemspec"
 
 gem 'pg'
+# gem 'sinatra'
+# gem 'tilt'
+# gem 'rack'
+# gem 'taps'
+# gem 'sinatra-base'
+# gem 'sinatra-reloader'
+
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
