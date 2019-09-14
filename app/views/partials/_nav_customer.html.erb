@@ -6,12 +6,12 @@
 
   <!-- Links -->
   	<%# link_to 'Baked Goods', items_path %>
-    <a class="nav-link underline_effect" href="https://baking-factory.herokuapp.com/items">Baked Goods</a>
+    <%= link_to 'Baked Goods', items_path, class: 'nav-link underline_effect' %>
     <%= link_to "My Account", customer_path(current_user.customer), class: "nav-link underline_effect" %>
 
     <!-- Logout -->
     <div style="padding-left: 6px;">
-      <li style="font-size: .8em;" class="underline_effect"><%= link_to "Log Out", "http://localhost:3000/sessions/destroy" %></li>
+      <li style="font-size: .8em;" class="underline_effect"><%= link_to "Log Out", logout_user_path %></li>
     </div>
     <!-- Cart -->
     <span style="float: right; margin-right: 25px; margin-top: 15px;">

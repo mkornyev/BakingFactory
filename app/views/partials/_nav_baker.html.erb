@@ -5,12 +5,12 @@
   <%= link_to image_tag("logo.png"), :controller => 'home', :action => 'home' %>
 
   <!-- Links -->
-    <a class="nav-link underline_effect" href="https://baking-factory.herokuapp.com/items">Items</a>
+    <%= link_to 'Items', items_path, class: 'nav-link underline_effect' %>
     <%= link_to 'Baking List', baking_path, class: "nav-link underline_effect" %>
 
     <!-- Logout -->
     <div style="padding-left: 6px;">
-      <li style="font-size: .8em;" class="underline_effect"><%= link_to "Log Out", "http://localhost:3000/sessions/destroy" %></li>
+      <li style="font-size: .8em;" class="underline_effect"><%= link_to "Log Out", logout_user_path %></li>
     </div>
 </div>
 </div>

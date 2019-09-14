@@ -5,8 +5,7 @@
   <%= link_to image_tag("logo.png"), :controller => 'home', :action => 'home' %>
 
   <!-- Links -->
-  	<%# link_to 'Baked Goods', items_path %>
-    <a class="nav-link underline_effect" href="https://baking-factory.herokuapp.com/items">Baked Goods</a>
+    <%= link_to 'Baked Goods', items_path, class: 'nav-link underline_effect' %>
     
     <div class="cart" style="text-align: center;">
       <li class="underline_effect" style="font-size: .8em; text-align: center;">

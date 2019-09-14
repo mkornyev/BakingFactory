@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   # get 'user/edit', to: 'users#edit', as: :edit_current_user
   
   # get 'sessions', to: 'sessions#new', as: :login
-  # get 'sessions', to: 'sessions#destroy', as: :logout
+  get 'sessions', to: 'sessions#destroy', as: 'logout_user'
   
   # Set the root url
   root :to => 'home#home'
