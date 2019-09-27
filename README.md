@@ -1,5 +1,4 @@
 <img src="bf_logo_markup.png" width="200px" alt="BF"><br>
-###### Welcome to the Baking Factory, a bread marketplace similar to the likes of Amazon.
 
 ## Setup (Ruby on Rails)
 1. Run `bundle install` in the project directory
@@ -34,7 +33,7 @@ User: 'user12' (users 1-120 exist in the system)
 
 ## Acknowledgements
 
-Larry Heimann, 'profh' on github, is responsible for writing the Model, populate script, helper, and test code for this project.
+Larry Heimann, 'profh' on github, is responsible for writing the Model and test code for this project.
 
 <br>
 <img src="mk_markup.png" width="45px" alt="MK">
