@@ -30,9 +30,9 @@ default: &default
   pool: 10 # <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
-production:
-  pool: 10
-  timeout: 5000 
+# production:
+#   pool: 10
+#   timeout: 5000 
 
 development:
   <<: *default
