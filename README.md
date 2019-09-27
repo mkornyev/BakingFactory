@@ -1,5 +1,4 @@
 <img src="bf_logo_markup.png" width="200px" alt="BF"><br>
-###### Welcome to the Baking Factory, a bread marketplace similar to the likes of Amazon.
 
 ## Setup (Ruby on Rails)
 1. Run `bundle install` in the project directory
