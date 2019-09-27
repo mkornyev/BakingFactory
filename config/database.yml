@@ -27,22 +27,27 @@
 # USING POSTGRES 
 
 default: &default
-  adapter: postgresql
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  pool: 10
+  timeout: 5000 
+  # adapter: postgresql
+  # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # timeout: 5000
+
+production:
+  pool: 10
+  timeout: 5000 
 
 development:
   <<: *default
-  database: psql_bf_dev
-  username: max
-  password: 
+  # database: psql_bf_dev
+  # username: max
+  # password: 
 
 test:
   <<: *default
-  database: psql_bf_test
-  username: max
-  password: 
+  # database: psql_bf_test
+  # username: max
+  # password: 
 
-# production:
-#   <<: *default
+
 #   database: pg_production
