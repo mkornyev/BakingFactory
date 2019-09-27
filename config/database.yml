@@ -26,20 +26,29 @@
 
 # USING POSTGRES 
 
-development:
+default: &default
   adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  encoding: unicode
+  pool: 10
+  # timeout: 5000
+
+development:
+  <<: *default
   database: psql_bf_dev
   username: max         # -U for Postgres
   password: 
-  pool: 10
 
 test:
   adapter: postgresql
   database: psql_bf_test
   username: max         # -U for Postgres
   password:
-  pool: 10
 
 production:
-  pool: 10
-  database: pg_production
+  <<: *default
+  database: psql_bf_dev
+  username: max
+  password:
+
+  # database: pg_production
