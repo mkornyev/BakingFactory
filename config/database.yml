@@ -34,13 +34,12 @@ development:
   pool: 10
 
 test:
-  <<: *default
+  adapter: postgresql
   database: psql_bf_test
-  username: max
+  username: max         # -U for Postgres
   password:
   pool: 10
 
 production:
   pool: 10
-
-#   database: pg_production
+  database: pg_production
