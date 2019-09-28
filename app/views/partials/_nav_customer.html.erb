@@ -5,7 +5,6 @@
   <%= link_to image_tag("logo.png"), :controller => 'home', :action => 'home' %>
 
   <!-- Links -->
-  	<%# link_to 'Baked Goods', items_path %>
     <%= link_to 'Baked Goods', items_path, class: 'nav-link underline_effect' %>
     <%= link_to "My Account", customer_path(current_user.customer), class: "nav-link underline_effect" %>
 

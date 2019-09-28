@@ -15,14 +15,14 @@
 		<% end %>
 	</div>
 
-	<div class="card mb-3" style="margin-top: 1%;">
+	<div class=" mb-3" style="margin-top: 1%;">
 	  <div class="card-body">
 
 	    <p class="card-text">
 	    	<% if @orders.empty? %>
 			    <p>There are no orders to ship. Add a new one to the system first.</p>
 			<% else %>
-	    	<table class="table table-striped" style="width: 95%; border: 1px dotted #007bff;">
+	    	<table class="table table-striped" style="width: 95%; border: 0px;">
 			    <thead>
 			      <tr>
 			        <th width="50">Order</th>
@@ -45,7 +45,7 @@
 			          				</p>
 			          				<%= button_to '+', {:controller => "orders", :action => "add_shipping", :order_item_id => oi.id}, :method=>:post, params: {order_item_id: oi.id}, class: 'btn btn-primary', style: 'border-radius: 50px; height: 35px; width: 35px; float: left;' %>
 			          				<%= button_to '-', {:controller => "orders", :action => "remove_shipping", :order_item_id => oi.id}, :method=>:post, params: {order_item_id: oi.id}, class: 'btn btn-primary', style: 'border-radius: 50px; height: 35px; width: 35px; float: left;' %>
-			          				<% if session[:shipped].include?(oi.id.to_s) %>
+			          				&nbsp;<% if session[:shipped].include?(oi.id.to_s) %>
 										<span class="btn btn-warning disabled" style=''>Packaged</span>
 									<% else %>
 									<% end %>
