@@ -1,6 +1,6 @@
 <img src="bf_logo_markup.png" width="200px" alt="BF"><br>
 
-Check out the Webapp <a href="http://desolate-caverns-22638.herokuapp.com/" >here</a>.
+Check out the deployed Webapp <a href="http://desolate-caverns-22638.herokuapp.com/" >on heroku</a>.
 
 ## Setup (Ruby on Rails)
 1. Run `bundle install` in the project directory
